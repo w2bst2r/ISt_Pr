@@ -1,0 +1,68 @@
+﻿@model IEnumerable<StajProject.Models.Recruiters>
+
+@{
+    ViewBag.Title = "View Recruiter List";
+}
+
+<h2>View Recruiter List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "AddRecruiter")
+</p>
+
+@if (!Model.Any())
+{
+    <p>We don't have any candidates yet.</p>
+}
+else
+{
+    <table class="table" id="Recruiters">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Surname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Surname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditRecruiter", new { id = item.ID }) |
+                        @Html.ActionLink("Delete", "DeleteRecruiter", new { id = item.ID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#Recruiters").DataTable();
+            $("#Recruiters .js-delete").on("click", function () {
+                confirm("are you sure you want to delete this recruiter");
+            });
+        });
+    </script>
+}

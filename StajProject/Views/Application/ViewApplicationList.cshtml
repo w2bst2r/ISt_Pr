@@ -1,0 +1,89 @@
+﻿@model IEnumerable<StajProject.Models.Applications>
+
+@{
+    ViewBag.Title = "ViewApplicationList";
+}
+
+<h2>Applications</h2>
+
+<p>
+    @Html.ActionLink("Create New", "AddApplication")
+</p>
+
+@if (!Model.Any())
+{
+    <p>We don't have any customers yet.</p>
+}
+else
+{
+<table class="table" id="Applications">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SurveyDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Candidates.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grades.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Positions.Name)
+            </th>
+            <th>  </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SurveyDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isActive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Candidates.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Grades.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Positions.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditApplication", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "DeleteApplication", new { id = item.ID }, new { @class = "js-delete" }) |
+                    @Html.ActionLink("Assign Manager", "AssignManager", new { id = item.ID }) |
+                    @Html.ActionLink("Assign Recruiter", "AssignRecruiter", new { id = item.ID })
+               </td>
+            </tr>
+        }
+    </tbody>
+</table>
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#Applications").DataTable();
+
+            $("#Applications .js-delete").on("click", function() {
+                confirm("are you sure you want to delete this customer");
+            });
+        });
+    </script>
+}

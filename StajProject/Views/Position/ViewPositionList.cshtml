@@ -1,0 +1,70 @@
+﻿@model IEnumerable<StajProject.Models.Positions>
+
+@{
+    ViewBag.Title = "ViewPositionList";
+}
+
+<h2>View Position List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "AddPosition")
+</p>
+
+@if (!Model.Any())
+{
+    <p>We don't have any Position yet.</p>
+}
+else
+{
+<table class="table" id="Positions">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditPosition", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "DeletePosition", new { id = item.ID })
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#Positions").DataTable();
+            $("#Positions .js-delete").on("click", function () {
+                confirm("are you sure you want to delete this position");
+            });
+        });
+    </script>
+}

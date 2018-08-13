@@ -1,0 +1,71 @@
+﻿@model IEnumerable<StajProject.Models.Managers>
+
+@{
+    ViewBag.Title = "View Manager List";
+}
+
+<h2>View Manager List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "AddManager")
+</p>
+
+@if (!Model.Any())
+{
+    <p>We don't have any Manager yet.</p>
+}
+else
+{
+<table class="table" id="Managers">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Surname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditManager", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "DeleteManager", new { id = item.ID })
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#Managers").DataTable();
+            $("#Managers .js-delete").on("click", function () {
+                confirm("are you sure you want to delete this manager");
+            });
+        });
+    </script>
+}
+
+

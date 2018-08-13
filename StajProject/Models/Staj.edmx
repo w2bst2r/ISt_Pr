@@ -1,0 +1,930 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Answers">
+          <Key>
+            <PropertyRef Name="QuestionID" />
+            <PropertyRef Name="ApplicationID" />
+          </Key>
+          <Property Name="QuestionID" Type="int" Nullable="false" />
+          <Property Name="ApplicationID" Type="int" Nullable="false" />
+          <Property Name="CandidateAnswer" Type="nvarchar" MaxLength="50" />
+          <Property Name="ManagerAnswer" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Application_Manager">
+          <Key>
+            <PropertyRef Name="ApplicationID" />
+            <PropertyRef Name="ManagerID" />
+          </Key>
+          <Property Name="ApplicationID" Type="int" Nullable="false" />
+          <Property Name="ManagerID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Application_Recruiter">
+          <Key>
+            <PropertyRef Name="ApplicationID" />
+            <PropertyRef Name="RecruiterID" />
+          </Key>
+          <Property Name="ApplicationID" Type="int" Nullable="false" />
+          <Property Name="RecruiterID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Applications">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SurveyDate" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CandidateID" Type="int" Nullable="false" />
+          <Property Name="PositionID" Type="int" Nullable="false" />
+          <Property Name="GradeID" Type="int" Nullable="false" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Candidate_Position">
+          <Key>
+            <PropertyRef Name="CandidateID" />
+            <PropertyRef Name="PositionID" />
+          </Key>
+          <Property Name="CandidateID" Type="int" Nullable="false" />
+          <Property Name="PositionID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Candidates">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Contact" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Language" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Department_Manager">
+          <Key>
+            <PropertyRef Name="DepartmentID" />
+            <PropertyRef Name="ManagerID" />
+          </Key>
+          <Property Name="DepartmentID" Type="int" Nullable="false" />
+          <Property Name="ManagerID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Department_Position">
+          <Key>
+            <PropertyRef Name="DepartmentID" />
+            <PropertyRef Name="PositionID" />
+          </Key>
+          <Property Name="DepartmentID" Type="int" Nullable="false" />
+          <Property Name="PositionID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Grades">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Manager_Position">
+          <Key>
+            <PropertyRef Name="ManagerID" />
+            <PropertyRef Name="PositionID" />
+          </Key>
+          <Property Name="ManagerID" Type="int" Nullable="false" />
+          <Property Name="PositionID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Managers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Positions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Questions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Question" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Recruiter_Position">
+          <Key>
+            <PropertyRef Name="RecruiterID" />
+            <PropertyRef Name="PositionID" />
+          </Key>
+          <Property Name="RecruiterID" Type="int" Nullable="false" />
+          <Property Name="PositionID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Recruiters">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Answers_Applications">
+          <End Role="Applications" Type="Self.Applications" Multiplicity="1" />
+          <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Answers">
+              <PropertyRef Name="ApplicationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Answers_Questions">
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+          <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Answers">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Application_Manager_Applications">
+          <End Role="Applications" Type="Self.Applications" Multiplicity="1" />
+          <End Role="Application_Manager" Type="Self.Application_Manager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Application_Manager">
+              <PropertyRef Name="ApplicationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Application_Manager_Managers">
+          <End Role="Managers" Type="Self.Managers" Multiplicity="1" />
+          <End Role="Application_Manager" Type="Self.Application_Manager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Managers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Application_Manager">
+              <PropertyRef Name="ManagerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Application_Recruiter_Applications">
+          <End Role="Applications" Type="Self.Applications" Multiplicity="1" />
+          <End Role="Application_Recruiter" Type="Self.Application_Recruiter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Application_Recruiter">
+              <PropertyRef Name="ApplicationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Application_Recruiter_Recruiters">
+          <End Role="Recruiters" Type="Self.Recruiters" Multiplicity="1" />
+          <End Role="Application_Recruiter" Type="Self.Application_Recruiter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recruiters">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Application_Recruiter">
+              <PropertyRef Name="RecruiterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Applications_Candidates">
+          <End Role="Candidates" Type="Self.Candidates" Multiplicity="1" />
+          <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Applications">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Applications_Grades">
+          <End Role="Grades" Type="Self.Grades" Multiplicity="1" />
+          <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grades">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Applications">
+              <PropertyRef Name="GradeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Applications_Positions">
+          <End Role="Positions" Type="Self.Positions" Multiplicity="1" />
+          <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Applications">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Candidate_Position_Candidates">
+          <End Role="Candidates" Type="Self.Candidates" Multiplicity="1" />
+          <End Role="Candidate_Position" Type="Self.Candidate_Position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Candidate_Position">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Candidate_Position_Positions">
+          <End Role="Positions" Type="Self.Positions" Multiplicity="1" />
+          <End Role="Candidate_Position" Type="Self.Candidate_Position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Candidate_Position">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_Manager_Departments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Department_Manager" Type="Self.Department_Manager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Department_Manager">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_Manager_Managers">
+          <End Role="Managers" Type="Self.Managers" Multiplicity="1" />
+          <End Role="Department_Manager" Type="Self.Department_Manager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Managers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Department_Manager">
+              <PropertyRef Name="ManagerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_Position_Departments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Department_Position" Type="Self.Department_Position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Department_Position">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_Position_Positions1">
+          <End Role="Positions" Type="Self.Positions" Multiplicity="1" />
+          <End Role="Department_Position" Type="Self.Department_Position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Department_Position">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manager_Position_Managers">
+          <End Role="Managers" Type="Self.Managers" Multiplicity="1" />
+          <End Role="Manager_Position" Type="Self.Manager_Position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Managers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Manager_Position">
+              <PropertyRef Name="ManagerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manager_Position_Positions">
+          <End Role="Positions" Type="Self.Positions" Multiplicity="1" />
+          <End Role="Manager_Position" Type="Self.Manager_Position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Manager_Position">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recruiter_Position_Positions">
+          <End Role="Positions" Type="Self.Positions" Multiplicity="1" />
+          <End Role="Recruiter_Position" Type="Self.Recruiter_Position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Recruiter_Position">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recruiter_Position_Recruiters">
+          <End Role="Recruiters" Type="Self.Recruiters" Multiplicity="1" />
+          <End Role="Recruiter_Position" Type="Self.Recruiter_Position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recruiters">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Recruiter_Position">
+              <PropertyRef Name="RecruiterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProjectModelStoreContainer">
+          <EntitySet Name="Answers" EntityType="Self.Answers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Application_Manager" EntityType="Self.Application_Manager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Application_Recruiter" EntityType="Self.Application_Recruiter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Applications" EntityType="Self.Applications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Candidate_Position" EntityType="Self.Candidate_Position" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Candidates" EntityType="Self.Candidates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department_Manager" EntityType="Self.Department_Manager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department_Position" EntityType="Self.Department_Position" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grades" EntityType="Self.Grades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Manager_Position" EntityType="Self.Manager_Position" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Managers" EntityType="Self.Managers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Positions" EntityType="Self.Positions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recruiter_Position" EntityType="Self.Recruiter_Position" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recruiters" EntityType="Self.Recruiters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Answers_Applications" Association="Self.FK_Answers_Applications">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Answers" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Answers_Questions" Association="Self.FK_Answers_Questions">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="Answers" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Application_Manager_Applications" Association="Self.FK_Application_Manager_Applications">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Application_Manager" EntitySet="Application_Manager" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Application_Manager_Managers" Association="Self.FK_Application_Manager_Managers">
+            <End Role="Managers" EntitySet="Managers" />
+            <End Role="Application_Manager" EntitySet="Application_Manager" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Application_Recruiter_Applications" Association="Self.FK_Application_Recruiter_Applications">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Application_Recruiter" EntitySet="Application_Recruiter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Application_Recruiter_Recruiters" Association="Self.FK_Application_Recruiter_Recruiters">
+            <End Role="Recruiters" EntitySet="Recruiters" />
+            <End Role="Application_Recruiter" EntitySet="Application_Recruiter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Applications_Candidates" Association="Self.FK_Applications_Candidates">
+            <End Role="Candidates" EntitySet="Candidates" />
+            <End Role="Applications" EntitySet="Applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Applications_Grades" Association="Self.FK_Applications_Grades">
+            <End Role="Grades" EntitySet="Grades" />
+            <End Role="Applications" EntitySet="Applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Applications_Positions" Association="Self.FK_Applications_Positions">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Applications" EntitySet="Applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Candidate_Position_Candidates" Association="Self.FK_Candidate_Position_Candidates">
+            <End Role="Candidates" EntitySet="Candidates" />
+            <End Role="Candidate_Position" EntitySet="Candidate_Position" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Candidate_Position_Positions" Association="Self.FK_Candidate_Position_Positions">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Candidate_Position" EntitySet="Candidate_Position" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_Manager_Departments" Association="Self.FK_Department_Manager_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Department_Manager" EntitySet="Department_Manager" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_Manager_Managers" Association="Self.FK_Department_Manager_Managers">
+            <End Role="Managers" EntitySet="Managers" />
+            <End Role="Department_Manager" EntitySet="Department_Manager" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_Position_Departments" Association="Self.FK_Department_Position_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Department_Position" EntitySet="Department_Position" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_Position_Positions1" Association="Self.FK_Department_Position_Positions1">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Department_Position" EntitySet="Department_Position" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manager_Position_Managers" Association="Self.FK_Manager_Position_Managers">
+            <End Role="Managers" EntitySet="Managers" />
+            <End Role="Manager_Position" EntitySet="Manager_Position" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manager_Position_Positions" Association="Self.FK_Manager_Position_Positions">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Manager_Position" EntitySet="Manager_Position" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recruiter_Position_Positions" Association="Self.FK_Recruiter_Position_Positions">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Recruiter_Position" EntitySet="Recruiter_Position" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recruiter_Position_Recruiters" Association="Self.FK_Recruiter_Position_Recruiters">
+            <End Role="Recruiters" EntitySet="Recruiters" />
+            <End Role="Recruiter_Position" EntitySet="Recruiter_Position" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Answers">
+          <Key>
+            <PropertyRef Name="QuestionID" />
+            <PropertyRef Name="ApplicationID" />
+          </Key>
+          <Property Name="QuestionID" Type="Int32" Nullable="false" />
+          <Property Name="ApplicationID" Type="Int32" Nullable="false" />
+          <Property Name="CandidateAnswer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ManagerAnswer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Applications" Relationship="Self.FK_Answers_Applications" FromRole="Answers" ToRole="Applications" />
+          <NavigationProperty Name="Questions" Relationship="Self.FK_Answers_Questions" FromRole="Answers" ToRole="Questions" />
+        </EntityType>
+        <EntityType Name="Applications">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SurveyDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CandidateID" Type="Int32" Nullable="false" />
+          <Property Name="PositionID" Type="Int32" Nullable="false" />
+          <Property Name="GradeID" Type="Int32" Nullable="false" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Answers" Relationship="Self.FK_Answers_Applications" FromRole="Applications" ToRole="Answers" />
+          <NavigationProperty Name="Candidates" Relationship="Self.FK_Applications_Candidates" FromRole="Applications" ToRole="Candidates" />
+          <NavigationProperty Name="Grades" Relationship="Self.FK_Applications_Grades" FromRole="Applications" ToRole="Grades" />
+          <NavigationProperty Name="Positions" Relationship="Self.FK_Applications_Positions" FromRole="Applications" ToRole="Positions" />
+          <NavigationProperty Name="Managers" Relationship="Self.Application_Manager" FromRole="Applications" ToRole="Managers" />
+          <NavigationProperty Name="Recruiters" Relationship="Self.Application_Recruiter" FromRole="Applications" ToRole="Recruiters" />
+        </EntityType>
+        <EntityType Name="Candidates">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Applications" Relationship="Self.FK_Applications_Candidates" FromRole="Candidates" ToRole="Applications" />
+          <NavigationProperty Name="Positions" Relationship="Self.Candidate_Position" FromRole="Candidates" ToRole="Positions" />
+        </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Managers" Relationship="Self.Department_Manager" FromRole="Departments" ToRole="Managers" />
+          <NavigationProperty Name="Positions" Relationship="Self.Department_Position" FromRole="Departments" ToRole="Positions" />
+        </EntityType>
+        <EntityType Name="Grades">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Applications" Relationship="Self.FK_Applications_Grades" FromRole="Grades" ToRole="Applications" />
+        </EntityType>
+        <EntityType Name="Managers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Applications" Relationship="Self.Application_Manager" FromRole="Managers" ToRole="Applications" />
+          <NavigationProperty Name="Departments" Relationship="Self.Department_Manager" FromRole="Managers" ToRole="Departments" />
+          <NavigationProperty Name="Positions" Relationship="Self.Manager_Position" FromRole="Managers" ToRole="Positions" />
+        </EntityType>
+        <EntityType Name="Positions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Applications" Relationship="Self.FK_Applications_Positions" FromRole="Positions" ToRole="Applications" />
+          <NavigationProperty Name="Candidates" Relationship="Self.Candidate_Position" FromRole="Positions" ToRole="Candidates" />
+          <NavigationProperty Name="Departments" Relationship="Self.Department_Position" FromRole="Positions" ToRole="Departments" />
+          <NavigationProperty Name="Managers" Relationship="Self.Manager_Position" FromRole="Positions" ToRole="Managers" />
+          <NavigationProperty Name="Recruiters" Relationship="Self.Recruiter_Position" FromRole="Positions" ToRole="Recruiters" />
+        </EntityType>
+        <EntityType Name="Questions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Answers" Relationship="Self.FK_Answers_Questions" FromRole="Questions" ToRole="Answers" />
+        </EntityType>
+        <EntityType Name="Recruiters">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Applications" Relationship="Self.Application_Recruiter" FromRole="Recruiters" ToRole="Applications" />
+          <NavigationProperty Name="Positions" Relationship="Self.Recruiter_Position" FromRole="Recruiters" ToRole="Positions" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Answers_Applications">
+          <End Role="Applications" Type="Self.Applications" Multiplicity="1" />
+          <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Answers">
+              <PropertyRef Name="ApplicationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Answers_Questions">
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+          <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Answers">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Applications_Candidates">
+          <End Role="Candidates" Type="Self.Candidates" Multiplicity="1" />
+          <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Applications">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Applications_Grades">
+          <End Role="Grades" Type="Self.Grades" Multiplicity="1" />
+          <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grades">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Applications">
+              <PropertyRef Name="GradeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Applications_Positions">
+          <End Role="Positions" Type="Self.Positions" Multiplicity="1" />
+          <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Applications">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Application_Manager">
+          <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
+          <End Role="Managers" Type="Self.Managers" Multiplicity="*" />
+        </Association>
+        <Association Name="Application_Recruiter">
+          <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
+          <End Role="Recruiters" Type="Self.Recruiters" Multiplicity="*" />
+        </Association>
+        <Association Name="Candidate_Position">
+          <End Role="Candidates" Type="Self.Candidates" Multiplicity="*" />
+          <End Role="Positions" Type="Self.Positions" Multiplicity="*" />
+        </Association>
+        <Association Name="Department_Manager">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="*" />
+          <End Role="Managers" Type="Self.Managers" Multiplicity="*" />
+        </Association>
+        <Association Name="Department_Position">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="*" />
+          <End Role="Positions" Type="Self.Positions" Multiplicity="*" />
+        </Association>
+        <Association Name="Manager_Position">
+          <End Role="Managers" Type="Self.Managers" Multiplicity="*" />
+          <End Role="Positions" Type="Self.Positions" Multiplicity="*" />
+        </Association>
+        <Association Name="Recruiter_Position">
+          <End Role="Positions" Type="Self.Positions" Multiplicity="*" />
+          <End Role="Recruiters" Type="Self.Recruiters" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="ProjectEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Answers" EntityType="Self.Answers" />
+          <EntitySet Name="Applications" EntityType="Self.Applications" />
+          <EntitySet Name="Candidates" EntityType="Self.Candidates" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" />
+          <EntitySet Name="Grades" EntityType="Self.Grades" />
+          <EntitySet Name="Managers" EntityType="Self.Managers" />
+          <EntitySet Name="Positions" EntityType="Self.Positions" />
+          <EntitySet Name="Questions" EntityType="Self.Questions" />
+          <EntitySet Name="Recruiters" EntityType="Self.Recruiters" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_Answers_Applications" Association="Self.FK_Answers_Applications">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Answers" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Answers_Questions" Association="Self.FK_Answers_Questions">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="Answers" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Applications_Candidates" Association="Self.FK_Applications_Candidates">
+            <End Role="Candidates" EntitySet="Candidates" />
+            <End Role="Applications" EntitySet="Applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Applications_Grades" Association="Self.FK_Applications_Grades">
+            <End Role="Grades" EntitySet="Grades" />
+            <End Role="Applications" EntitySet="Applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Applications_Positions" Association="Self.FK_Applications_Positions">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Applications" EntitySet="Applications" />
+          </AssociationSet>
+          <AssociationSet Name="Application_Manager" Association="Self.Application_Manager">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Managers" EntitySet="Managers" />
+          </AssociationSet>
+          <AssociationSet Name="Application_Recruiter" Association="Self.Application_Recruiter">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Recruiters" EntitySet="Recruiters" />
+          </AssociationSet>
+          <AssociationSet Name="Candidate_Position" Association="Self.Candidate_Position">
+            <End Role="Candidates" EntitySet="Candidates" />
+            <End Role="Positions" EntitySet="Positions" />
+          </AssociationSet>
+          <AssociationSet Name="Department_Manager" Association="Self.Department_Manager">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Managers" EntitySet="Managers" />
+          </AssociationSet>
+          <AssociationSet Name="Department_Position" Association="Self.Department_Position">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Positions" EntitySet="Positions" />
+          </AssociationSet>
+          <AssociationSet Name="Manager_Position" Association="Self.Manager_Position">
+            <End Role="Managers" EntitySet="Managers" />
+            <End Role="Positions" EntitySet="Positions" />
+          </AssociationSet>
+          <AssociationSet Name="Recruiter_Position" Association="Self.Recruiter_Position">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Recruiters" EntitySet="Recruiters" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProjectModelStoreContainer" CdmEntityContainer="ProjectEntities">
+          <EntitySetMapping Name="Answers">
+            <EntityTypeMapping TypeName="ProjectModel.Answers">
+              <MappingFragment StoreEntitySet="Answers">
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+                <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+                <ScalarProperty Name="CandidateAnswer" ColumnName="CandidateAnswer" />
+                <ScalarProperty Name="ManagerAnswer" ColumnName="ManagerAnswer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Applications">
+            <EntityTypeMapping TypeName="ProjectModel.Applications">
+              <MappingFragment StoreEntitySet="Applications">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SurveyDate" ColumnName="SurveyDate" />
+                <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+                <ScalarProperty Name="GradeID" ColumnName="GradeID" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Candidates">
+            <EntityTypeMapping TypeName="ProjectModel.Candidates">
+              <MappingFragment StoreEntitySet="Candidates">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="ProjectModel.Departments">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grades">
+            <EntityTypeMapping TypeName="ProjectModel.Grades">
+              <MappingFragment StoreEntitySet="Grades">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Managers">
+            <EntityTypeMapping TypeName="ProjectModel.Managers">
+              <MappingFragment StoreEntitySet="Managers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Positions">
+            <EntityTypeMapping TypeName="ProjectModel.Positions">
+              <MappingFragment StoreEntitySet="Positions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="ProjectModel.Questions">
+              <MappingFragment StoreEntitySet="Questions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recruiters">
+            <EntityTypeMapping TypeName="ProjectModel.Recruiters">
+              <MappingFragment StoreEntitySet="Recruiters">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ProjectModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Application_Manager" TypeName="ProjectModel.Application_Manager" StoreEntitySet="Application_Manager">
+            <EndProperty Name="Applications">
+              <ScalarProperty Name="ID" ColumnName="ApplicationID" />
+            </EndProperty>
+            <EndProperty Name="Managers">
+              <ScalarProperty Name="ID" ColumnName="ManagerID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Application_Recruiter" TypeName="ProjectModel.Application_Recruiter" StoreEntitySet="Application_Recruiter">
+            <EndProperty Name="Applications">
+              <ScalarProperty Name="ID" ColumnName="ApplicationID" />
+            </EndProperty>
+            <EndProperty Name="Recruiters">
+              <ScalarProperty Name="ID" ColumnName="RecruiterID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Candidate_Position" TypeName="ProjectModel.Candidate_Position" StoreEntitySet="Candidate_Position">
+            <EndProperty Name="Candidates">
+              <ScalarProperty Name="ID" ColumnName="CandidateID" />
+            </EndProperty>
+            <EndProperty Name="Positions">
+              <ScalarProperty Name="ID" ColumnName="PositionID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Department_Manager" TypeName="ProjectModel.Department_Manager" StoreEntitySet="Department_Manager">
+            <EndProperty Name="Departments">
+              <ScalarProperty Name="ID" ColumnName="DepartmentID" />
+            </EndProperty>
+            <EndProperty Name="Managers">
+              <ScalarProperty Name="ID" ColumnName="ManagerID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Department_Position" TypeName="ProjectModel.Department_Position" StoreEntitySet="Department_Position">
+            <EndProperty Name="Departments">
+              <ScalarProperty Name="ID" ColumnName="DepartmentID" />
+            </EndProperty>
+            <EndProperty Name="Positions">
+              <ScalarProperty Name="ID" ColumnName="PositionID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Manager_Position" TypeName="ProjectModel.Manager_Position" StoreEntitySet="Manager_Position">
+            <EndProperty Name="Managers">
+              <ScalarProperty Name="ID" ColumnName="ManagerID" />
+            </EndProperty>
+            <EndProperty Name="Positions">
+              <ScalarProperty Name="ID" ColumnName="PositionID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Recruiter_Position" TypeName="ProjectModel.Recruiter_Position" StoreEntitySet="Recruiter_Position">
+            <EndProperty Name="Positions">
+              <ScalarProperty Name="ID" ColumnName="PositionID" />
+            </EndProperty>
+            <EndProperty Name="Recruiters">
+              <ScalarProperty Name="ID" ColumnName="RecruiterID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -59,8 +59,8 @@ namespace StajProject.Controllers
         [HttpGet]
         public ActionResult AddApplication()
         {
-            ViewBag.CandidateFullName = new SelectList(db.Candidates,"ID", "FullName");
-            ViewBag.CandidateSurname = new SelectList(db.Candidates, "ID", "Surname");
+            ViewBag.CandidateID = new SelectList(db.Candidates, "ID", "FullName");
+            //ViewBag.CandidateSurname = new SelectList(db.Candidates, "ID", "SurName");
             ViewBag.PositionID = new SelectList(db.Positions, "ID", "Name");
             ViewBag.GradeID = new SelectList(db.Grades, "ID", "Name");
             return View();

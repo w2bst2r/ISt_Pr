@@ -24,7 +24,7 @@ namespace StajProject.Models
     
         public int ID { get; set; }
 
-        [Display(Name="Name")]
+        [Display(Name="Candidate")]
         public string Name { get; set; }
 
         [Display(Name = "Surname")]
@@ -45,7 +45,8 @@ namespace StajProject.Models
 
         public string FullName
         {
-            get { return Name + " " + Surname; } 
+            get { return Name + " " + Surname; }
+            set { } 
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -17,7 +17,7 @@ namespace StajProject.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Recruiters()
         {
-            this.Applications = new HashSet<Applications>();
+            this.Application_Recruiter = new HashSet<Application_Recruiter>();
             this.Positions = new HashSet<Positions>();
         }
     
@@ -27,7 +27,7 @@ namespace StajProject.Models
         public string Title { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Applications> Applications { get; set; }
+        public virtual ICollection<Application_Recruiter> Application_Recruiter { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Positions> Positions { get; set; }
     }

@@ -23,27 +23,31 @@ namespace StajProject.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult AssignManager()
         {
+            //show it as Managers.ID  store it in Application.ID
             ViewBag.ApplicationID = new SelectList(db.Applications, "ID", "ID");
+            //show it as Managers.Name  store it in Managers.ID
             ViewBag.ManagerID = new SelectList(db.Managers, "ID", "Name");
             return View();
         }
 
         [HttpPost]
-        public ActionResult AssignManager(Applications application)
+        public ActionResult AssignManager(Application_Manager application_manager)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    db.Applications.Add(application);
+                    
+                    db.Application_Manager.Add(application_manager);
                     db.SaveChanges();
                     return RedirectToAction("ViewApplicationList");
                 }
-                return View(application);
+                return View(application_manager);
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }
@@ -52,15 +56,40 @@ namespace StajProject.Controllers
         [HttpGet]
         public ActionResult AssignRecruiter()
         {
+            ViewBag.ApplicationID = new SelectList(db.Applications, "ID", "ID");
+            ViewBag.RecruiterID = new SelectList(db.Recruiters, "ID", "Name");
             return View();
         }
+
+        [HttpPost]
+        public ActionResult AssignRecruiter(Application_Recruiter application_recruiter)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+
+                    db.Application_Recruiter.Add(application_recruiter);
+                    db.SaveChanges();
+                    return RedirectToAction("ViewApplicationList");
+                }
+                return View(application_recruiter);
+            }
+            catch (Exception ex)
+            {
+                return View();
+            }
+        }
+
 
 
         [HttpGet]
         public ActionResult AddApplication()
         {
-            ViewBag.CandidateID = new SelectList(db.Candidates, "ID", "FullName");
-            //ViewBag.CandidateSurname = new SelectList(db.Candidates, "ID", "SurName");
+            //in the textbox, FullName proprety is shows as a text but the selected cell is stored at ID
+            //shows Candidates.Name as a list
+            //store it in Candidates.ID
+            ViewBag.CandidateID = new SelectList(db.Candidates, "ID", "Name");
             ViewBag.PositionID = new SelectList(db.Positions, "ID", "Name");
             ViewBag.GradeID = new SelectList(db.Grades, "ID", "Name");
             return View();

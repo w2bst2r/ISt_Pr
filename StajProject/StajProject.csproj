@@ -190,7 +190,12 @@
     <Compile Include="Models\Applications.cs">
       <DependentUpon>Staj.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Application_Manager.cs" />
+    <Compile Include="Models\Application_Manager.cs">
+      <DependentUpon>Staj.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Application_Recruiter.cs">
+      <DependentUpon>Staj.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Candidates.cs">
       <DependentUpon>Staj.tt</DependentUpon>
     </Compile>
@@ -584,6 +589,7 @@
     <Content Include="Views\Question\AddQuestion.cshtml" />
     <Content Include="Views\Shared\_navbar.cshtml" />
     <Content Include="Views\Application\AssignManager.cshtml" />
+    <Content Include="Views\Application\AssignRecruiter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -11,39 +11,32 @@ namespace StajProject.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Applications
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Applications()
         {
             this.Answers = new HashSet<Answers>();
-            this.Managers = new HashSet<Managers>();
-            this.Recruiters = new HashSet<Recruiters>();
+            this.Application_Manager = new HashSet<Application_Manager>();
+            this.Application_Recruiter = new HashSet<Application_Recruiter>();
         }
     
         public int ID { get; set; }
-
-        [Display(Name = "Date")]
         public string SurveyDate { get; set; }
-
         public int CandidateID { get; set; }
         public int PositionID { get; set; }
         public int GradeID { get; set; }
-
-        [Display(Name = "Is Active")]
         public bool isActive { get; set; }
-      
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Answers> Answers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Application_Manager> Application_Manager { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Application_Recruiter> Application_Recruiter { get; set; }
         public virtual Candidates Candidates { get; set; }
         public virtual Grades Grades { get; set; }
         public virtual Positions Positions { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Managers> Managers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Recruiters> Recruiters { get; set; }
     }
 }

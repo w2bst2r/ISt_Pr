@@ -17,7 +17,7 @@ namespace StajProject.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Managers()
         {
-            this.Applications = new HashSet<Applications>();
+            this.Application_Manager = new HashSet<Application_Manager>();
             this.Departments = new HashSet<Departments>();
             this.Positions = new HashSet<Positions>();
         }
@@ -28,7 +28,7 @@ namespace StajProject.Models
         public string Title { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Applications> Applications { get; set; }
+        public virtual ICollection<Application_Manager> Application_Manager { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Departments> Departments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

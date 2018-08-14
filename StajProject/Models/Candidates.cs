@@ -11,8 +11,7 @@ namespace StajProject.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Candidates
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,32 +22,13 @@ namespace StajProject.Models
         }
     
         public int ID { get; set; }
-
-        [Display(Name="Candidate")]
         public string Name { get; set; }
-
-        [Display(Name = "Surname")]
         public string Surname { get; set; }
-
-        [Display(Name = "Email")]
         public string Email { get; set; }
-
-        [Display(Name = "Contact")]
         public string Contact { get; set; }
-
-        [Display(Name = "Language")]
         public string Language { get; set; }
-
-        [Display(Name = "State")]
         public string State { get; set; }
-
-
-        public string FullName
-        {
-            get { return Name + " " + Surname; }
-            set { } 
-        }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Applications> Applications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

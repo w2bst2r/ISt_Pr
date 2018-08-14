@@ -12,13 +12,13 @@ namespace StajProject.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Application_Manager
+    public partial class Application_Recruiter
     {
         public int ID { get; set; }
         public int ApplicationID { get; set; }
-        public int ManagerID { get; set; }
+        public int RecruiterID { get; set; }
     
         public virtual Applications Applications { get; set; }
-        public virtual Managers Managers { get; set; }
+        public virtual Recruiters Recruiters { get; set; }
     }
 }

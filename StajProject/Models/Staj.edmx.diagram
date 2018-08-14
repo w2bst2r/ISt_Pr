@@ -4,29 +4,33 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5e4b227d7bc042d5a975b831314b7ea2" Name="Diagram1" ZoomLevel="80">
-        <EntityTypeShape EntityType="ProjectModel.Answers" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectModel.Applications" Width="1.5" PointX="7.5" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectModel.Candidates" Width="1.5" PointX="5.875" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectModel.Departments" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectModel.Grades" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectModel.Managers" Width="1.5" PointX="3.125" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectModel.Positions" Width="1.5" PointX="5.125" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectModel.Questions" Width="1.5" PointX="8.375" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectModel.Recruiters" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProjectModel.sysdiagrams" Width="1.5" PointX="2.125" PointY="6.625" IsExpanded="true" />
-        <AssociationConnector Association="ProjectModel.FK_Answers_Applications" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjectModel.FK_Answers_Questions" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjectModel.FK_Applications_Candidates" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjectModel.FK_Applications_Grades" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjectModel.FK_Applications_Positions" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjectModel.Application_Manager" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjectModel.Application_Recruiter" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjectModel.Candidate_Position" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjectModel.Department_Manager" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjectModel.Department_Position" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjectModel.Manager_Position" ManuallyRouted="false" />
-        <AssociationConnector Association="ProjectModel.Recruiter_Position" ManuallyRouted="false" />
+      <Diagram DiagramId="5e4b227d7bc042d5a975b831314b7ea2" Name="Diagram1" ZoomLevel="60">
+        <EntityTypeShape EntityType="ProjectModel.Answers" Width="2.375" PointX="13.375" PointY="4.875" />
+        <EntityTypeShape EntityType="ProjectModel.Application_Manager" Width="2.375" PointX="2.625" PointY="10.5" />
+        <EntityTypeShape EntityType="ProjectModel.Application_Recruiter" Width="2.375" PointX="13.375" PointY="9" />
+        <EntityTypeShape EntityType="ProjectModel.Applications" Width="2.375" PointX="10.25" PointY="5.25" />
+        <EntityTypeShape EntityType="ProjectModel.Candidates" Width="2.375" PointX="8" PointY="1.375" />
+        <EntityTypeShape EntityType="ProjectModel.Departments" Width="2.375" PointX="0.5" PointY="6" />
+        <EntityTypeShape EntityType="ProjectModel.Grades" Width="2.375" PointX="7" PointY="9.875" />
+        <EntityTypeShape EntityType="ProjectModel.Managers" Width="2.375" PointX="4.25" PointY="2.375" />
+        <EntityTypeShape EntityType="ProjectModel.Positions" Width="2.375" PointX="5.75" PointY="5.5" />
+        <EntityTypeShape EntityType="ProjectModel.Questions" Width="2.375" PointX="10.25" PointY="2.125" />
+        <EntityTypeShape EntityType="ProjectModel.Recruiters" Width="2.375" PointX="9.75" PointY="10" />
+        <EntityTypeShape EntityType="ProjectModel.sysdiagrams" Width="2.375" PointX="0.5" PointY="1" />
+        <AssociationConnector Association="ProjectModel.FK_Answers_Applications" />
+        <AssociationConnector Association="ProjectModel.FK_Answers_Questions" />
+        <AssociationConnector Association="ProjectModel.FK_Application_Manager_Applications" />
+        <AssociationConnector Association="ProjectModel.FK_Application_Manager_Managers" />
+        <AssociationConnector Association="ProjectModel.FK_Application_Recruiter_Applications1" />
+        <AssociationConnector Association="ProjectModel.FK_Application_Recruiter_Recruiters1" />
+        <AssociationConnector Association="ProjectModel.FK_Applications_Candidates" />
+        <AssociationConnector Association="ProjectModel.FK_Applications_Grades" />
+        <AssociationConnector Association="ProjectModel.FK_Applications_Positions" />
+        <AssociationConnector Association="ProjectModel.Candidate_Position" />
+        <AssociationConnector Association="ProjectModel.Department_Manager" />
+        <AssociationConnector Association="ProjectModel.Department_Position" />
+        <AssociationConnector Association="ProjectModel.Manager_Position" />
+        <AssociationConnector Association="ProjectModel.Recruiter_Position" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

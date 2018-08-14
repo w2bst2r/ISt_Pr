@@ -7,7 +7,10 @@
 <h2>Applications</h2>
 
 <p>
-    @Html.ActionLink("Create New", "AddApplication")
+    @Html.ActionLink("Create New", "AddApplication") |
+    @Html.ActionLink("Assign Manager", "AssignManager") |
+    @Html.ActionLink("Assign Recruiter", "AssignRecruiter")
+
 </p>
 
 @if (!Model.Any())
@@ -65,9 +68,7 @@ else
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "EditApplication", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "DeleteApplication", new { id = item.ID }, new { @class = "js-delete" }) |
-                    @Html.ActionLink("Assign Manager", "AssignManager", new { id = item.ID }) |
-                    @Html.ActionLink("Assign Recruiter", "AssignRecruiter", new { id = item.ID })
+                    @Html.ActionLink("Delete", "DeleteApplication", new { id = item.ID }, new { @class = "js-delete" })     
                </td>
             </tr>
         }

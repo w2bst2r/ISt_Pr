@@ -68,7 +68,8 @@ else
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "EditApplication", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "DeleteApplication", new { id = item.ID }, new { @class = "js-delete" })     
+                    @Html.ActionLink("Delete", "DeleteApplication", new { id = item.ID }, new { @class = "js-delete" }) |
+                    @Html.ActionLink("Send Survey", "SendEmail", new { id = item.ID })
                </td>
             </tr>
         }

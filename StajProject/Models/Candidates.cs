@@ -11,7 +11,8 @@ namespace StajProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Candidates
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,6 +23,8 @@ namespace StajProject.Models
         }
     
         public int ID { get; set; }
+
+        [Display(Name = "Candidate")]
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }

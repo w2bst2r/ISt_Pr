@@ -11,7 +11,8 @@ namespace StajProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Applications
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,12 +22,18 @@ namespace StajProject.Models
             this.Application_Manager = new HashSet<Application_Manager>();
             this.Application_Recruiter = new HashSet<Application_Recruiter>();
         }
-    
+
+        [Display(Name = "App Id")]
         public int ID { get; set; }
+
+        [Display(Name = "Survey Date")]
         public string SurveyDate { get; set; }
+
         public int CandidateID { get; set; }
         public int PositionID { get; set; }
         public int GradeID { get; set; }
+
+        [Display(Name ="Is Active" )]
         public bool isActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

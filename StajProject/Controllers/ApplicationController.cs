@@ -2,9 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 
 namespace StajProject.Controllers
@@ -17,20 +21,57 @@ namespace StajProject.Controllers
         {
             return RedirectToAction("ViewApplicationList");
         }
-        public ActionResult Survey()
+   //--------------------Email Part--------------------------------------------------
+        //this is just to see the survey sent
+
+        //public static async Task<string> EMailTemplate(string template)
+        //{
+        //    var templateFilePath = HostingEnvironment.MapPath("~/Content/templates/") + template + ".cshtml";
+        //    StreamReader objstreamreaderfile = new StreamReader(templateFilePath);
+        //    var body = await objstreamreaderfile.ReadToEndAsync();
+        //    objstreamreaderfile.Close();
+        //    return body;
+        //}
+
+        public ActionResult SendEmail()
         {
             return View();
         }
 
-        [HttpGet]
-        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> SendEmail(SendEmailViewModel model)
+        {
+            //message contains the body of the email
+            //var message = await EMailTemplate("WelcomeEmail");
+            //replace all occurence of ViewBag.Name with the name
+            //message = message.Replace("@ViewBag.Name", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(model.FirstName));
+            var mailbody = $@"Hello website owner,
+            This is a new contact request from your website:
+            Name: {model.FirstName}
+            LastName: {model.Email}                    
+            Cheers,
+            The websites contact form";
+            await MessageServices.SendEmailAsync(model.Email, "Welcome!", mailbody);
+            ModelState.AddModelError("", "Email successfully sent.");
+            return View("EmailSent");
+        }
+
+        public ActionResult EmailSent()
+        {
+            return View();
+        }
+   //--------------------Email Part End--------------------------------------------------
         public ActionResult AssignManager()
         {
-            //show it as Managers.ID  store it in Application.ID
-            ViewBag.ApplicationID = new SelectList(db.Applications, "ID", "ID");
-            //show it as Managers.Name  store it in Managers.ID
-            ViewBag.ManagerID = new SelectList(db.Managers, "ID", "Name");
-            return View();
+            if (Session["Email"] != null)
+            {
+                //show it as Managers.ID  store it in Application.ID
+                ViewBag.ApplicationID = new SelectList(db.Applications, "ID", "ID");
+                //show it as Managers.Name  store it in Managers.ID
+                ViewBag.ManagerID = new SelectList(db.Managers, "ID", "Name");
+                return View();
+            }
+            else return Content("You can't access this page");
         }
 
         [HttpPost]
@@ -49,11 +90,11 @@ namespace StajProject.Controllers
             }
             catch (Exception ex)
             {
+                ViewBag.Error = ex.Message;
                 return View();
             }
         }
 
-        [HttpGet]
         public ActionResult AssignRecruiter()
         {
             ViewBag.ApplicationID = new SelectList(db.Applications, "ID", "ID");
@@ -77,13 +118,11 @@ namespace StajProject.Controllers
             }
             catch (Exception ex)
             {
+                ViewBag.Error = ex.Message;
                 return View();
             }
         }
 
-
-
-        [HttpGet]
         public ActionResult AddApplication()
         {
             //in the textbox, FullName proprety is shows as a text but the selected cell is stored at ID
@@ -98,6 +137,9 @@ namespace StajProject.Controllers
         [HttpPost]
         public ActionResult AddApplication(Applications application)
         {
+            ViewBag.CandidateID = new SelectList(db.Candidates, "ID", "Name");
+            ViewBag.PositionID = new SelectList(db.Positions, "ID", "Name");
+            ViewBag.GradeID = new SelectList(db.Grades, "ID", "Name");
             try
             {
                 if (ModelState.IsValid)
@@ -106,14 +148,15 @@ namespace StajProject.Controllers
                     db.SaveChanges();
                     return RedirectToAction("ViewApplicationList");
                 }
-                return View(application);
+                return View();
             }
-            catch
+            catch (Exception ex)
             {
+                ViewBag.Error = ex.Message;
                 return View();
             }
         }
-        [HttpGet]
+
         public ActionResult DeleteApplication(int? id)
         {
             try
@@ -132,14 +175,12 @@ namespace StajProject.Controllers
             }
         }
 
-
         public ActionResult ClearForm()
         {
             ModelState.Clear();
             return View("AddApplication");
         }
 
-        [HttpGet]
         public ActionResult EditApplication(int? id)
         {
             if (id == null)

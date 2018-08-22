@@ -210,6 +210,7 @@
       <DependentUpon>Staj.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MessageServices.cs" />
     <Compile Include="Models\Positions.cs">
       <DependentUpon>Staj.tt</DependentUpon>
     </Compile>
@@ -219,6 +220,10 @@
     <Compile Include="Models\Recruiters.cs">
       <DependentUpon>Staj.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Registrations.cs">
+      <DependentUpon>Staj.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SendEmailViewModel.cs" />
     <Compile Include="Models\Staj.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -431,6 +436,7 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
+    <Content Include="Content\templates\WelcomeEmail.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -527,7 +533,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -559,9 +567,8 @@
     <Content Include="Views\Candidate\SubmitSurvey.cshtml" />
     <Content Include="Views\Candidate\ViewCandidateList.cshtml" />
     <Content Include="Views\Candidate\DeleteCandidate.cshtml" />
-    <Content Include="Views\Application\AddApplication.cshtml" />
     <Content Include="Views\Application\ViewApplicationList.cshtml" />
-    <Content Include="Views\Application\Survey.cshtml" />
+    <Content Include="Content\templates\Survey.cshtml" />
     <Content Include="Views\Application\EditApplication.cshtml" />
     <Content Include="Views\Position\AddPosition.cshtml" />
     <Content Include="Views\Position\ViewPositionList.cshtml" />
@@ -590,6 +597,11 @@
     <Content Include="Views\Shared\_navbar.cshtml" />
     <Content Include="Views\Application\AssignManager.cshtml" />
     <Content Include="Views\Application\AssignRecruiter.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Application\SendEmail.cshtml" />
+    <Content Include="Views\Application\EmailSent.cshtml" />
+    <Content Include="Views\Application\AddApplication.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

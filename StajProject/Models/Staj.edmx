@@ -142,6 +142,13 @@
           <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Registrations">
+          <Key>
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -397,6 +404,7 @@
           <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Recruiter_Position" EntityType="Self.Recruiter_Position" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Recruiters" EntityType="Self.Recruiters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registrations" EntityType="Self.Registrations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Answers_Applications" Association="Self.FK_Answers_Applications">
             <End Role="Applications" EntitySet="Applications" />
@@ -491,6 +499,7 @@
           <EntitySet Name="Positions" EntityType="ProjectModel.Positions" />
           <EntitySet Name="Questions" EntityType="ProjectModel.Questions" />
           <EntitySet Name="Recruiters" EntityType="ProjectModel.Recruiters" />
+          <EntitySet Name="Registrations" EntityType="ProjectModel.Registrations" />
           <EntitySet Name="sysdiagrams" EntityType="ProjectModel.sysdiagrams" />
           <AssociationSet Name="FK_Answers_Applications" Association="ProjectModel.FK_Answers_Applications">
             <End Role="Applications" EntitySet="Applications" />
@@ -673,6 +682,13 @@
           <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Application_Recruiter" Relationship="ProjectModel.FK_Application_Recruiter_Recruiters1" FromRole="Recruiters" ToRole="Application_Recruiter" />
           <NavigationProperty Name="Positions" Relationship="ProjectModel.Recruiter_Position" FromRole="Recruiters" ToRole="Positions" />
+        </EntityType>
+        <EntityType Name="Registrations">
+          <Key>
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -922,6 +938,14 @@
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registrations">
+            <EntityTypeMapping TypeName="ProjectModel.Registrations">
+              <MappingFragment StoreEntitySet="Registrations">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

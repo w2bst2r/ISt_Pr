@@ -1,14 +1,21 @@
 ﻿<!DOCTYPE html>
+
 <html>
+
 <head>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <style>
         .navbar {
             overflow: hidden;
             background-color: #5b5b5b;
             font-family: Times New Roman, Helvetica, sans-serif;
         }
+
+
 
             .navbar a {
                 float: left;
@@ -19,31 +26,57 @@
                 text-decoration: none;
             }
 
+
+
                 .navbar a:hover, .dropdown:hover .dropbtn {
                     background-color: cadetblue;
                 }
     </style>
+
 </head>
+
 <body>
 
 
 
-        <a href="@Url.Action("Index", "Home")"><span>Ana Sayfa</span></a>
-        <a href="@Url.Action("Index", "Candidate")"><span>Adaylar</span></a>
-        <a href="@Url.Action("Index", "Manager")"><span>Yoneticler</span></a>
-         <a href="@Url.Action("Index", "Recruiter")"><span>Ise alimlar</span></a>
-        <a href="@Url.Action("Index", "Application")"><span>Basvurular</span></a>
-        <a href="@Url.Action("Index", "Position")"><span>Pozisyonlar</span></a>
-        <a href="@Url.Action("Index", "Grade")"><span>Seviyeler</span></a>
-        <a href="@Url.Action("Index", "Department")"><span>Departmanlar</span></a>
-        <a href="@Url.Action("Index", "Question")"><span>Sorular</span></a>
+
+
+
+
+    <a href="@Url.Action("Index", "Home")"><span>Home</span></a>
+
+    <a href="@Url.Action("Index", "Candidate")"><span>Candidates</span></a>
+
+    <a href="@Url.Action("Index", "Application")"><span>Applications</span></a>
+
+    <a href="@Url.Action("Index", "Manager")"><span>Managers</span></a>
+
+    <a href="@Url.Action("Index", "Recruiter")"><span>Recruiters</span></a>
+
+    <a href="@Url.Action("Index", "Position")"><span>Positions</span></a>
+
+    <a href="@Url.Action("Index", "Grade")"><span>Grades</span></a>
+
+    <a href="@Url.Action("Index", "Department")"><span>Departments</span></a>
+
+    <a href="@Url.Action("Index", "Question")"><span>Questions</span></a>
+
     <div class="nav navbar-nav navbar-right">
-        @Html.Partial("_loginPartial")
+
+        @Html.ActionLink("Register", "Register", "Home", routeValues: null, htmlAttributes: new { id = "registerLink" })
+
+        @Html.ActionLink("Log in", "Login", "Home", routeValues: null, htmlAttributes: new { id = "loginLink" })
 
     </div>
 
 
 
 
+
+
+
+
+
 </body>
+
 </html>

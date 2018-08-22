@@ -36,6 +36,7 @@ namespace StajProject.Models
         public virtual DbSet<Positions> Positions { get; set; }
         public virtual DbSet<Questions> Questions { get; set; }
         public virtual DbSet<Recruiters> Recruiters { get; set; }
+        public virtual DbSet<Registrations> Registrations { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

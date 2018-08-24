@@ -26,19 +26,22 @@ else
                 @Html.DisplayNameFor(model => model.ID)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SurveyDate)
+                @Html.DisplayNameFor(model => model.Date)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.isActive)
+                @Html.DisplayNameFor(model => model.Candidates.FirstName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Candidates.Name)
+                @Html.DisplayNameFor(model => model.Candidates.Surname)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Grades.Name)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Positions.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsSent)
             </th>
             <th>  </th>
 
@@ -52,13 +55,13 @@ else
                     @Html.DisplayFor(modelItem => item.ID)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.SurveyDate)
+                    @Html.DisplayFor(modelItem => item.Date)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.isActive)
+                    @Html.DisplayFor(modelItem => item.Candidates.FirstName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Candidates.Name)
+                    @Html.DisplayFor(modelItem => item.Candidates.Surname)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Grades.Name)
@@ -67,15 +70,19 @@ else
                     @Html.DisplayFor(modelItem => item.Positions.Name)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.IsSent)
+                </td>
+                <td>
                     @Html.ActionLink("Edit", "EditApplication", new { id = item.ID }) |
                     @Html.ActionLink("Delete", "DeleteApplication", new { id = item.ID }, new { @class = "js-delete" }) |
-                    @Html.ActionLink("Send Survey", "SendEmail", new { id = item.ID })
+                    @Html.ActionLink("Send Survey", "SendEmail", new { id = item.ID, email = item.Candidates.Email, FirstName=item.Candidates.FirstName , Surname= item.Candidates.Surname})
                </td>
             </tr>
         }
     </tbody>
 </table>
 }
+
 
 @section scripts
 {

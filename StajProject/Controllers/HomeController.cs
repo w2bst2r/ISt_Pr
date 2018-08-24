@@ -1,4 +1,5 @@
-﻿using StajProject.Models;
+﻿using StajProject.Filters;
+using StajProject.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +16,9 @@ namespace StajProject.Controllers
             return View();
         }
 
-        public ActionResult Login()
+        public ActionResult Login(string previousURL)
         {
+            Session["previousURL"] = previousURL;
             return View();
         }
 
@@ -27,9 +29,9 @@ namespace StajProject.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var details = (from user in db.Registrations
+                    var details = (from user in db.Registrations //for each row in Registrations table
                                    where user.Email == registration.Email && user.Password == registration.Password
-                                   select new 
+                                   select new
                                    {
                                        user.Email,
                                        user.Password
@@ -39,20 +41,32 @@ namespace StajProject.Controllers
                     {
                         Session["Email"] = details.FirstOrDefault().Email;
                         Session["Password"] = details.FirstOrDefault().Password;
-                        return RedirectToAction("Index");
+                        if (Session["previousURL"] == null)
+                        {
+                            return RedirectToAction("Index");
+                        }
+                        else return Redirect(Session["previousURL"].ToString());
                     }
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Invalid Credential");
+                    else
+                    {
+                        ModelState.AddModelError("", "Invalid Credentials. Please verify your Email and Password");
+                    }
                 }
                 return View("Login");
             }
 
             catch (Exception ex)
             {
-                return View("Register");
+                ViewBag.Error = ex.InnerException;
+                return View();
             }
+        }
+
+        public ActionResult Logout()
+        {
+            Session["Email"] = null;
+            Session["Password"] = null;
+            return RedirectToAction("Index");
         }
 
         public ActionResult Register()
@@ -75,6 +89,7 @@ namespace StajProject.Controllers
             }
             catch (Exception ex)
             {
+                ViewBag.Error = ex.InnerException;
                 return View();
             }
         }

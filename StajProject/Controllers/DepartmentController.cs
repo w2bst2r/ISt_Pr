@@ -13,6 +13,7 @@ namespace StajProject.Controllers
     {
         ProjectEntities db = new ProjectEntities();
         // GET: Candidate
+        [OverrideActionFilters]
         public ActionResult Index()
         {
             return RedirectToAction("ViewDepartmentList");
@@ -65,7 +66,7 @@ namespace StajProject.Controllers
         public ActionResult ClearForm()
         {
             ModelState.Clear();
-            return View("AddDepartment");
+            return RedirectToAction("AddDepartment");
         }
 
         [HttpGet]
@@ -102,6 +103,7 @@ namespace StajProject.Controllers
             }
         }
 
+        [OverrideActionFilters]
         public ActionResult ViewDepartmentList()
         {
             return View(db.Departments.ToList());

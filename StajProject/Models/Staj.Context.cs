@@ -25,17 +25,22 @@ namespace StajProject.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Recruiters> Recruiters { get; set; }
         public virtual DbSet<Answers> Answers { get; set; }
         public virtual DbSet<Application_Manager> Application_Manager { get; set; }
         public virtual DbSet<Application_Recruiter> Application_Recruiter { get; set; }
         public virtual DbSet<Applications> Applications { get; set; }
+        public virtual DbSet<Candidate_Position> Candidate_Position { get; set; }
         public virtual DbSet<Candidates> Candidates { get; set; }
+        public virtual DbSet<Department_Manager> Department_Manager { get; set; }
+        public virtual DbSet<Department_Position> Department_Position { get; set; }
         public virtual DbSet<Departments> Departments { get; set; }
         public virtual DbSet<Grades> Grades { get; set; }
+        public virtual DbSet<Manager_Position> Manager_Position { get; set; }
         public virtual DbSet<Managers> Managers { get; set; }
         public virtual DbSet<Positions> Positions { get; set; }
         public virtual DbSet<Questions> Questions { get; set; }
-        public virtual DbSet<Recruiters> Recruiters { get; set; }
+        public virtual DbSet<Recruiter_Position> Recruiter_Position { get; set; }
         public virtual DbSet<Registrations> Registrations { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }

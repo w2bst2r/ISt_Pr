@@ -1,4 +1,5 @@
-﻿using StajProject.Models;
+﻿using StajProject.Filters;
+using StajProject.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,10 +10,12 @@ using System.Web.Mvc;
 
 namespace StajProject.Controllers
 {
+    [AdminFilter]
     public class ManagerController : Controller
     {
         ProjectEntities db = new ProjectEntities();
         // GET: Candidate
+        [OverrideActionFilters]
         public ActionResult Index()
         {
             return RedirectToAction("ViewManagerList");
@@ -65,7 +68,7 @@ namespace StajProject.Controllers
         public ActionResult ClearForm()
         {
             ModelState.Clear();
-            return View("AddManager");
+            return RedirectToAction("AddManager");
         }
 
         [HttpGet]
@@ -101,7 +104,7 @@ namespace StajProject.Controllers
                 return View();
             }
         }
-
+        [OverrideActionFilters]
         public ActionResult ViewManagerList()
         {
             return View(db.Managers.ToList());

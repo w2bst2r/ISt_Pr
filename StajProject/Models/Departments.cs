@@ -17,16 +17,16 @@ namespace StajProject.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Departments()
         {
-            this.Managers = new HashSet<Managers>();
-            this.Positions = new HashSet<Positions>();
+            this.Department_Manager = new HashSet<Department_Manager>();
+            this.Department_Position = new HashSet<Department_Position>();
         }
     
         public int ID { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Managers> Managers { get; set; }
+        public virtual ICollection<Department_Manager> Department_Manager { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Positions> Positions { get; set; }
+        public virtual ICollection<Department_Position> Department_Position { get; set; }
     }
 }

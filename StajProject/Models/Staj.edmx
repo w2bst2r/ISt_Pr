@@ -36,17 +36,17 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SurveyDate" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="CandidateID" Type="int" Nullable="false" />
           <Property Name="PositionID" Type="int" Nullable="false" />
           <Property Name="GradeID" Type="int" Nullable="false" />
-          <Property Name="isActive" Type="bit" Nullable="false" />
+          <Property Name="IsSent" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Candidate_Position">
           <Key>
-            <PropertyRef Name="CandidateID" />
-            <PropertyRef Name="PositionID" />
+            <PropertyRef Name="ID" />
           </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="CandidateID" Type="int" Nullable="false" />
           <Property Name="PositionID" Type="int" Nullable="false" />
         </EntityType>
@@ -55,28 +55,28 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Contact" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Language" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="State" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneNo" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Language" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="State" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="Department_Manager">
           <Key>
-            <PropertyRef Name="DepartmentID" />
-            <PropertyRef Name="ManagerID" />
+            <PropertyRef Name="ID" />
           </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="DepartmentID" Type="int" Nullable="false" />
           <Property Name="ManagerID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Department_Position">
           <Key>
-            <PropertyRef Name="DepartmentID" />
-            <PropertyRef Name="PositionID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="DepartmentID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="PositionID" Type="int" Nullable="false" />
+          <Property Name="DepartmentID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Departments">
           <Key>
@@ -94,9 +94,9 @@
         </EntityType>
         <EntityType Name="Manager_Position">
           <Key>
-            <PropertyRef Name="ManagerID" />
-            <PropertyRef Name="PositionID" />
+            <PropertyRef Name="ID" />
           </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="ManagerID" Type="int" Nullable="false" />
           <Property Name="PositionID" Type="int" Nullable="false" />
         </EntityType>
@@ -105,9 +105,9 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneNo" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="Positions">
           <Key>
@@ -116,7 +116,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Questions">
           <Key>
@@ -127,9 +127,9 @@
         </EntityType>
         <EntityType Name="Recruiter_Position">
           <Key>
-            <PropertyRef Name="RecruiterID" />
-            <PropertyRef Name="PositionID" />
+            <PropertyRef Name="ID" />
           </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="RecruiterID" Type="int" Nullable="false" />
           <Property Name="PositionID" Type="int" Nullable="false" />
         </EntityType>
@@ -140,7 +140,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneNo" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="Registrations">
           <Key>
@@ -160,7 +160,9 @@
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <Association Name="FK_Answers_Applications">
-          <End Role="Applications" Type="Self.Applications" Multiplicity="1" />
+          <End Role="Applications" Type="Self.Applications" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Applications">
@@ -172,7 +174,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Answers_Questions">
-          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Questions">
@@ -184,7 +188,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Application_Manager_Applications">
-          <End Role="Applications" Type="Self.Applications" Multiplicity="1" />
+          <End Role="Applications" Type="Self.Applications" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Application_Manager" Type="Self.Application_Manager" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Applications">
@@ -196,7 +202,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Application_Manager_Managers">
-          <End Role="Managers" Type="Self.Managers" Multiplicity="1" />
+          <End Role="Managers" Type="Self.Managers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Application_Manager" Type="Self.Application_Manager" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Managers">
@@ -208,7 +216,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Application_Recruiter_Applications1">
-          <End Role="Applications" Type="Self.Applications" Multiplicity="1" />
+          <End Role="Applications" Type="Self.Applications" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Application_Recruiter" Type="Self.Application_Recruiter" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Applications">
@@ -220,7 +230,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Application_Recruiter_Recruiters1">
-          <End Role="Recruiters" Type="Self.Recruiters" Multiplicity="1" />
+          <End Role="Recruiters" Type="Self.Recruiters" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Application_Recruiter" Type="Self.Application_Recruiter" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Recruiters">
@@ -232,7 +244,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Applications_Candidates">
-          <End Role="Candidates" Type="Self.Candidates" Multiplicity="1" />
+          <End Role="Candidates" Type="Self.Candidates" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Candidates">
@@ -244,7 +258,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Applications_Grades">
-          <End Role="Grades" Type="Self.Grades" Multiplicity="1" />
+          <End Role="Grades" Type="Self.Grades" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Grades">
@@ -256,7 +272,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Applications_Positions">
-          <End Role="Positions" Type="Self.Positions" Multiplicity="1" />
+          <End Role="Positions" Type="Self.Positions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Applications" Type="Self.Applications" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Positions">
@@ -268,7 +286,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Candidate_Position_Candidates">
-          <End Role="Candidates" Type="Self.Candidates" Multiplicity="1" />
+          <End Role="Candidates" Type="Self.Candidates" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Candidate_Position" Type="Self.Candidate_Position" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Candidates">
@@ -280,7 +300,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Candidate_Position_Positions">
-          <End Role="Positions" Type="Self.Positions" Multiplicity="1" />
+          <End Role="Positions" Type="Self.Positions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Candidate_Position" Type="Self.Candidate_Position" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Positions">
@@ -292,7 +314,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Department_Manager_Departments">
-          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Department_Manager" Type="Self.Department_Manager" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Departments">
@@ -304,7 +328,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Department_Manager_Managers">
-          <End Role="Managers" Type="Self.Managers" Multiplicity="1" />
+          <End Role="Managers" Type="Self.Managers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Department_Manager" Type="Self.Department_Manager" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Managers">
@@ -316,7 +342,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Department_Position_Departments">
-          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Department_Position" Type="Self.Department_Position" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Departments">
@@ -328,7 +356,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Department_Position_Positions1">
-          <End Role="Positions" Type="Self.Positions" Multiplicity="1" />
+          <End Role="Positions" Type="Self.Positions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Department_Position" Type="Self.Department_Position" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Positions">
@@ -340,7 +370,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Manager_Position_Managers">
-          <End Role="Managers" Type="Self.Managers" Multiplicity="1" />
+          <End Role="Managers" Type="Self.Managers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Manager_Position" Type="Self.Manager_Position" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Managers">
@@ -352,7 +384,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Manager_Position_Positions">
-          <End Role="Positions" Type="Self.Positions" Multiplicity="1" />
+          <End Role="Positions" Type="Self.Positions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Manager_Position" Type="Self.Manager_Position" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Positions">
@@ -364,7 +398,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Recruiter_Position_Positions">
-          <End Role="Positions" Type="Self.Positions" Multiplicity="1" />
+          <End Role="Positions" Type="Self.Positions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Recruiter_Position" Type="Self.Recruiter_Position" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Positions">
@@ -376,7 +412,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Recruiter_Position_Recruiters">
-          <End Role="Recruiters" Type="Self.Recruiters" Multiplicity="1" />
+          <End Role="Recruiters" Type="Self.Recruiters" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Recruiter_Position" Type="Self.Recruiter_Position" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Recruiters">
@@ -488,17 +526,22 @@
     <edmx:ConceptualModels>
       <Schema Namespace="ProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="ProjectEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Recruiters" EntityType="ProjectModel.Recruiters" />
           <EntitySet Name="Answers" EntityType="ProjectModel.Answers" />
           <EntitySet Name="Application_Manager" EntityType="ProjectModel.Application_Manager" />
           <EntitySet Name="Application_Recruiter" EntityType="ProjectModel.Application_Recruiter" />
           <EntitySet Name="Applications" EntityType="ProjectModel.Applications" />
+          <EntitySet Name="Candidate_Position" EntityType="ProjectModel.Candidate_Position" />
           <EntitySet Name="Candidates" EntityType="ProjectModel.Candidates" />
+          <EntitySet Name="Department_Manager" EntityType="ProjectModel.Department_Manager" />
+          <EntitySet Name="Department_Position" EntityType="ProjectModel.Department_Position" />
           <EntitySet Name="Departments" EntityType="ProjectModel.Departments" />
           <EntitySet Name="Grades" EntityType="ProjectModel.Grades" />
+          <EntitySet Name="Manager_Position" EntityType="ProjectModel.Manager_Position" />
           <EntitySet Name="Managers" EntityType="ProjectModel.Managers" />
           <EntitySet Name="Positions" EntityType="ProjectModel.Positions" />
           <EntitySet Name="Questions" EntityType="ProjectModel.Questions" />
-          <EntitySet Name="Recruiters" EntityType="ProjectModel.Recruiters" />
+          <EntitySet Name="Recruiter_Position" EntityType="ProjectModel.Recruiter_Position" />
           <EntitySet Name="Registrations" EntityType="ProjectModel.Registrations" />
           <EntitySet Name="sysdiagrams" EntityType="ProjectModel.sysdiagrams" />
           <AssociationSet Name="FK_Answers_Applications" Association="ProjectModel.FK_Answers_Applications">
@@ -537,27 +580,58 @@
             <End Role="Positions" EntitySet="Positions" />
             <End Role="Applications" EntitySet="Applications" />
           </AssociationSet>
-          <AssociationSet Name="Candidate_Position" Association="ProjectModel.Candidate_Position">
+          <AssociationSet Name="FK_Candidate_Position_Candidates" Association="ProjectModel.FK_Candidate_Position_Candidates">
             <End Role="Candidates" EntitySet="Candidates" />
-            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Candidate_Position" EntitySet="Candidate_Position" />
           </AssociationSet>
-          <AssociationSet Name="Department_Manager" Association="ProjectModel.Department_Manager">
+          <AssociationSet Name="FK_Candidate_Position_Positions" Association="ProjectModel.FK_Candidate_Position_Positions">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Candidate_Position" EntitySet="Candidate_Position" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_Manager_Departments" Association="ProjectModel.FK_Department_Manager_Departments">
             <End Role="Departments" EntitySet="Departments" />
-            <End Role="Managers" EntitySet="Managers" />
+            <End Role="Department_Manager" EntitySet="Department_Manager" />
           </AssociationSet>
-          <AssociationSet Name="Department_Position" Association="ProjectModel.Department_Position">
+          <AssociationSet Name="FK_Department_Manager_Managers" Association="ProjectModel.FK_Department_Manager_Managers">
+            <End Role="Managers" EntitySet="Managers" />
+            <End Role="Department_Manager" EntitySet="Department_Manager" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_Position_Departments" Association="ProjectModel.FK_Department_Position_Departments">
             <End Role="Departments" EntitySet="Departments" />
-            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Department_Position" EntitySet="Department_Position" />
           </AssociationSet>
-          <AssociationSet Name="Manager_Position" Association="ProjectModel.Manager_Position">
+          <AssociationSet Name="FK_Department_Position_Positions1" Association="ProjectModel.FK_Department_Position_Positions1">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Department_Position" EntitySet="Department_Position" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manager_Position_Managers" Association="ProjectModel.FK_Manager_Position_Managers">
             <End Role="Managers" EntitySet="Managers" />
-            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Manager_Position" EntitySet="Manager_Position" />
           </AssociationSet>
-          <AssociationSet Name="Recruiter_Position" Association="ProjectModel.Recruiter_Position">
+          <AssociationSet Name="FK_Manager_Position_Positions" Association="ProjectModel.FK_Manager_Position_Positions">
             <End Role="Positions" EntitySet="Positions" />
+            <End Role="Manager_Position" EntitySet="Manager_Position" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recruiter_Position_Positions" Association="ProjectModel.FK_Recruiter_Position_Positions">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Recruiter_Position" EntitySet="Recruiter_Position" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recruiter_Position_Recruiters" Association="ProjectModel.FK_Recruiter_Position_Recruiters">
             <End Role="Recruiters" EntitySet="Recruiters" />
+            <End Role="Recruiter_Position" EntitySet="Recruiter_Position" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
+        <EntityType Name="Recruiters">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Application_Recruiter" Relationship="ProjectModel.FK_Application_Recruiter_Recruiters1" FromRole="Recruiters" ToRole="Application_Recruiter" />
+          <NavigationProperty Name="Recruiter_Position" Relationship="ProjectModel.FK_Recruiter_Position_Recruiters" FromRole="Recruiters" ToRole="Recruiter_Position" />
+        </EntityType>
         <EntityType Name="Answers">
           <Key>
             <PropertyRef Name="QuestionID" />
@@ -595,11 +669,11 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SurveyDate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CandidateID" Type="Int32" Nullable="false" />
           <Property Name="PositionID" Type="Int32" Nullable="false" />
           <Property Name="GradeID" Type="Int32" Nullable="false" />
-          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsSent" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Answers" Relationship="ProjectModel.FK_Answers_Applications" FromRole="Applications" ToRole="Answers" />
           <NavigationProperty Name="Application_Manager" Relationship="ProjectModel.FK_Application_Manager_Applications" FromRole="Applications" ToRole="Application_Manager" />
           <NavigationProperty Name="Application_Recruiter" Relationship="ProjectModel.FK_Application_Recruiter_Applications1" FromRole="Applications" ToRole="Application_Recruiter" />
@@ -607,19 +681,49 @@
           <NavigationProperty Name="Grades" Relationship="ProjectModel.FK_Applications_Grades" FromRole="Applications" ToRole="Grades" />
           <NavigationProperty Name="Positions" Relationship="ProjectModel.FK_Applications_Positions" FromRole="Applications" ToRole="Positions" />
         </EntityType>
+        <EntityType Name="Candidate_Position">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="CandidateID" Type="Int32" Nullable="false" />
+          <Property Name="PositionID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Candidates" Relationship="ProjectModel.FK_Candidate_Position_Candidates" FromRole="Candidate_Position" ToRole="Candidates" />
+          <NavigationProperty Name="Positions" Relationship="ProjectModel.FK_Candidate_Position_Positions" FromRole="Candidate_Position" ToRole="Positions" />
+        </EntityType>
         <EntityType Name="Candidates">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Contact" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Language" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Language" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Applications" Relationship="ProjectModel.FK_Applications_Candidates" FromRole="Candidates" ToRole="Applications" />
-          <NavigationProperty Name="Positions" Relationship="ProjectModel.Candidate_Position" FromRole="Candidates" ToRole="Positions" />
+          <NavigationProperty Name="Candidate_Position" Relationship="ProjectModel.FK_Candidate_Position_Candidates" FromRole="Candidates" ToRole="Candidate_Position" />
+        </EntityType>
+        <EntityType Name="Department_Manager">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentID" Type="Int32" Nullable="false" />
+          <Property Name="ManagerID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Departments" Relationship="ProjectModel.FK_Department_Manager_Departments" FromRole="Department_Manager" ToRole="Departments" />
+          <NavigationProperty Name="Managers" Relationship="ProjectModel.FK_Department_Manager_Managers" FromRole="Department_Manager" ToRole="Managers" />
+        </EntityType>
+        <EntityType Name="Department_Position">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="PositionID" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Departments" Relationship="ProjectModel.FK_Department_Position_Departments" FromRole="Department_Position" ToRole="Departments" />
+          <NavigationProperty Name="Positions" Relationship="ProjectModel.FK_Department_Position_Positions1" FromRole="Department_Position" ToRole="Positions" />
         </EntityType>
         <EntityType Name="Departments">
           <Key>
@@ -627,8 +731,8 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Managers" Relationship="ProjectModel.Department_Manager" FromRole="Departments" ToRole="Managers" />
-          <NavigationProperty Name="Positions" Relationship="ProjectModel.Department_Position" FromRole="Departments" ToRole="Positions" />
+          <NavigationProperty Name="Department_Manager" Relationship="ProjectModel.FK_Department_Manager_Departments" FromRole="Departments" ToRole="Department_Manager" />
+          <NavigationProperty Name="Department_Position" Relationship="ProjectModel.FK_Department_Position_Departments" FromRole="Departments" ToRole="Department_Position" />
         </EntityType>
         <EntityType Name="Grades">
           <Key>
@@ -638,17 +742,27 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Applications" Relationship="ProjectModel.FK_Applications_Grades" FromRole="Grades" ToRole="Applications" />
         </EntityType>
+        <EntityType Name="Manager_Position">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ManagerID" Type="Int32" Nullable="false" />
+          <Property Name="PositionID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Managers" Relationship="ProjectModel.FK_Manager_Position_Managers" FromRole="Manager_Position" ToRole="Managers" />
+          <NavigationProperty Name="Positions" Relationship="ProjectModel.FK_Manager_Position_Positions" FromRole="Manager_Position" ToRole="Positions" />
+        </EntityType>
         <EntityType Name="Managers">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Application_Manager" Relationship="ProjectModel.FK_Application_Manager_Managers" FromRole="Managers" ToRole="Application_Manager" />
-          <NavigationProperty Name="Departments" Relationship="ProjectModel.Department_Manager" FromRole="Managers" ToRole="Departments" />
-          <NavigationProperty Name="Positions" Relationship="ProjectModel.Manager_Position" FromRole="Managers" ToRole="Positions" />
+          <NavigationProperty Name="Department_Manager" Relationship="ProjectModel.FK_Department_Manager_Managers" FromRole="Managers" ToRole="Department_Manager" />
+          <NavigationProperty Name="Manager_Position" Relationship="ProjectModel.FK_Manager_Position_Managers" FromRole="Managers" ToRole="Manager_Position" />
         </EntityType>
         <EntityType Name="Positions">
           <Key>
@@ -657,12 +771,12 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Applications" Relationship="ProjectModel.FK_Applications_Positions" FromRole="Positions" ToRole="Applications" />
-          <NavigationProperty Name="Candidates" Relationship="ProjectModel.Candidate_Position" FromRole="Positions" ToRole="Candidates" />
-          <NavigationProperty Name="Departments" Relationship="ProjectModel.Department_Position" FromRole="Positions" ToRole="Departments" />
-          <NavigationProperty Name="Managers" Relationship="ProjectModel.Manager_Position" FromRole="Positions" ToRole="Managers" />
-          <NavigationProperty Name="Recruiters" Relationship="ProjectModel.Recruiter_Position" FromRole="Positions" ToRole="Recruiters" />
+          <NavigationProperty Name="Candidate_Position" Relationship="ProjectModel.FK_Candidate_Position_Positions" FromRole="Positions" ToRole="Candidate_Position" />
+          <NavigationProperty Name="Department_Position" Relationship="ProjectModel.FK_Department_Position_Positions1" FromRole="Positions" ToRole="Department_Position" />
+          <NavigationProperty Name="Manager_Position" Relationship="ProjectModel.FK_Manager_Position_Positions" FromRole="Positions" ToRole="Manager_Position" />
+          <NavigationProperty Name="Recruiter_Position" Relationship="ProjectModel.FK_Recruiter_Position_Positions" FromRole="Positions" ToRole="Recruiter_Position" />
         </EntityType>
         <EntityType Name="Questions">
           <Key>
@@ -672,16 +786,15 @@
           <Property Name="Question" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Answers" Relationship="ProjectModel.FK_Answers_Questions" FromRole="Questions" ToRole="Answers" />
         </EntityType>
-        <EntityType Name="Recruiters">
+        <EntityType Name="Recruiter_Position">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Application_Recruiter" Relationship="ProjectModel.FK_Application_Recruiter_Recruiters1" FromRole="Recruiters" ToRole="Application_Recruiter" />
-          <NavigationProperty Name="Positions" Relationship="ProjectModel.Recruiter_Position" FromRole="Recruiters" ToRole="Positions" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="RecruiterID" Type="Int32" Nullable="false" />
+          <Property Name="PositionID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Positions" Relationship="ProjectModel.FK_Recruiter_Position_Positions" FromRole="Recruiter_Position" ToRole="Positions" />
+          <NavigationProperty Name="Recruiters" Relationship="ProjectModel.FK_Recruiter_Position_Recruiters" FromRole="Recruiter_Position" ToRole="Recruiters" />
         </EntityType>
         <EntityType Name="Registrations">
           <Key>
@@ -701,7 +814,9 @@
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <Association Name="FK_Answers_Applications">
-          <End Type="ProjectModel.Applications" Role="Applications" Multiplicity="1" />
+          <End Type="ProjectModel.Applications" Role="Applications" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="ProjectModel.Answers" Role="Answers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Applications">
@@ -713,7 +828,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Answers_Questions">
-          <End Type="ProjectModel.Questions" Role="Questions" Multiplicity="1" />
+          <End Type="ProjectModel.Questions" Role="Questions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="ProjectModel.Answers" Role="Answers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Questions">
@@ -725,7 +842,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Application_Manager_Applications">
-          <End Type="ProjectModel.Applications" Role="Applications" Multiplicity="1" />
+          <End Type="ProjectModel.Applications" Role="Applications" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="ProjectModel.Application_Manager" Role="Application_Manager" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Applications">
@@ -737,7 +856,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Application_Manager_Managers">
-          <End Type="ProjectModel.Managers" Role="Managers" Multiplicity="1" />
+          <End Type="ProjectModel.Managers" Role="Managers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="ProjectModel.Application_Manager" Role="Application_Manager" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Managers">
@@ -749,7 +870,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Application_Recruiter_Applications1">
-          <End Type="ProjectModel.Applications" Role="Applications" Multiplicity="1" />
+          <End Type="ProjectModel.Applications" Role="Applications" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="ProjectModel.Application_Recruiter" Role="Application_Recruiter" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Applications">
@@ -761,7 +884,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Application_Recruiter_Recruiters1">
-          <End Type="ProjectModel.Recruiters" Role="Recruiters" Multiplicity="1" />
+          <End Type="ProjectModel.Recruiters" Role="Recruiters" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="ProjectModel.Application_Recruiter" Role="Application_Recruiter" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Recruiters">
@@ -773,7 +898,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Applications_Candidates">
-          <End Type="ProjectModel.Candidates" Role="Candidates" Multiplicity="1" />
+          <End Type="ProjectModel.Candidates" Role="Candidates" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="ProjectModel.Applications" Role="Applications" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Candidates">
@@ -785,7 +912,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Applications_Grades">
-          <End Type="ProjectModel.Grades" Role="Grades" Multiplicity="1" />
+          <End Type="ProjectModel.Grades" Role="Grades" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="ProjectModel.Applications" Role="Applications" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Grades">
@@ -797,7 +926,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Applications_Positions">
-          <End Type="ProjectModel.Positions" Role="Positions" Multiplicity="1" />
+          <End Type="ProjectModel.Positions" Role="Positions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="ProjectModel.Applications" Role="Applications" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Positions">
@@ -808,25 +939,145 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Candidate_Position">
-          <End Type="ProjectModel.Candidates" Role="Candidates" Multiplicity="*" />
-          <End Type="ProjectModel.Positions" Role="Positions" Multiplicity="*" />
+        <Association Name="FK_Candidate_Position_Candidates">
+          <End Type="ProjectModel.Candidates" Role="Candidates" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ProjectModel.Candidate_Position" Role="Candidate_Position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Candidate_Position">
+              <PropertyRef Name="CandidateID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
-        <Association Name="Department_Manager">
-          <End Type="ProjectModel.Departments" Role="Departments" Multiplicity="*" />
-          <End Type="ProjectModel.Managers" Role="Managers" Multiplicity="*" />
+        <Association Name="FK_Candidate_Position_Positions">
+          <End Type="ProjectModel.Positions" Role="Positions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ProjectModel.Candidate_Position" Role="Candidate_Position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Candidate_Position">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
-        <Association Name="Department_Position">
-          <End Type="ProjectModel.Departments" Role="Departments" Multiplicity="*" />
-          <End Type="ProjectModel.Positions" Role="Positions" Multiplicity="*" />
+        <Association Name="FK_Department_Manager_Departments">
+          <End Type="ProjectModel.Departments" Role="Departments" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ProjectModel.Department_Manager" Role="Department_Manager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Department_Manager">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
-        <Association Name="Manager_Position">
-          <End Type="ProjectModel.Managers" Role="Managers" Multiplicity="*" />
-          <End Type="ProjectModel.Positions" Role="Positions" Multiplicity="*" />
+        <Association Name="FK_Department_Manager_Managers">
+          <End Type="ProjectModel.Managers" Role="Managers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ProjectModel.Department_Manager" Role="Department_Manager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Managers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Department_Manager">
+              <PropertyRef Name="ManagerID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
-        <Association Name="Recruiter_Position">
-          <End Type="ProjectModel.Positions" Role="Positions" Multiplicity="*" />
-          <End Type="ProjectModel.Recruiters" Role="Recruiters" Multiplicity="*" />
+        <Association Name="FK_Department_Position_Departments">
+          <End Type="ProjectModel.Departments" Role="Departments" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ProjectModel.Department_Position" Role="Department_Position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Department_Position">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_Position_Positions1">
+          <End Type="ProjectModel.Positions" Role="Positions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ProjectModel.Department_Position" Role="Department_Position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Department_Position">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manager_Position_Managers">
+          <End Type="ProjectModel.Managers" Role="Managers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ProjectModel.Manager_Position" Role="Manager_Position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Managers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Manager_Position">
+              <PropertyRef Name="ManagerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manager_Position_Positions">
+          <End Type="ProjectModel.Positions" Role="Positions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ProjectModel.Manager_Position" Role="Manager_Position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Manager_Position">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recruiter_Position_Positions">
+          <End Type="ProjectModel.Positions" Role="Positions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ProjectModel.Recruiter_Position" Role="Recruiter_Position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Recruiter_Position">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recruiter_Position_Recruiters">
+          <End Type="ProjectModel.Recruiters" Role="Recruiters" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ProjectModel.Recruiter_Position" Role="Recruiter_Position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recruiters">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Recruiter_Position">
+              <PropertyRef Name="RecruiterID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -834,6 +1085,16 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ProjectModelStoreContainer" CdmEntityContainer="ProjectEntities">
+          <EntitySetMapping Name="Recruiters">
+            <EntityTypeMapping TypeName="ProjectModel.Recruiters">
+              <MappingFragment StoreEntitySet="Recruiters">
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Answers">
             <EntityTypeMapping TypeName="ProjectModel.Answers">
               <MappingFragment StoreEntitySet="Answers">
@@ -865,11 +1126,20 @@
           <EntitySetMapping Name="Applications">
             <EntityTypeMapping TypeName="ProjectModel.Applications">
               <MappingFragment StoreEntitySet="Applications">
-                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="IsSent" ColumnName="IsSent" />
                 <ScalarProperty Name="GradeID" ColumnName="GradeID" />
                 <ScalarProperty Name="PositionID" ColumnName="PositionID" />
                 <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
-                <ScalarProperty Name="SurveyDate" ColumnName="SurveyDate" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Candidate_Position">
+            <EntityTypeMapping TypeName="ProjectModel.Candidate_Position">
+              <MappingFragment StoreEntitySet="Candidate_Position">
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+                <ScalarProperty Name="CandidateID" ColumnName="CandidateID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -879,10 +1149,28 @@
               <MappingFragment StoreEntitySet="Candidates">
                 <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="Language" ColumnName="Language" />
-                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Department_Manager">
+            <EntityTypeMapping TypeName="ProjectModel.Department_Manager">
+              <MappingFragment StoreEntitySet="Department_Manager">
+                <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Department_Position">
+            <EntityTypeMapping TypeName="ProjectModel.Department_Position">
+              <MappingFragment StoreEntitySet="Department_Position">
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -903,12 +1191,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Manager_Position">
+            <EntityTypeMapping TypeName="ProjectModel.Manager_Position">
+              <MappingFragment StoreEntitySet="Manager_Position">
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+                <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Managers">
             <EntityTypeMapping TypeName="ProjectModel.Managers">
               <MappingFragment StoreEntitySet="Managers">
-                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -916,7 +1213,7 @@
           <EntitySetMapping Name="Positions">
             <EntityTypeMapping TypeName="ProjectModel.Positions">
               <MappingFragment StoreEntitySet="Positions">
-                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -931,12 +1228,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Recruiters">
-            <EntityTypeMapping TypeName="ProjectModel.Recruiters">
-              <MappingFragment StoreEntitySet="Recruiters">
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Surname" ColumnName="Surname" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
+          <EntitySetMapping Name="Recruiter_Position">
+            <EntityTypeMapping TypeName="ProjectModel.Recruiter_Position">
+              <MappingFragment StoreEntitySet="Recruiter_Position">
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+                <ScalarProperty Name="RecruiterID" ColumnName="RecruiterID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -960,47 +1256,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="Candidate_Position" TypeName="ProjectModel.Candidate_Position" StoreEntitySet="Candidate_Position">
-            <EndProperty Name="Positions">
-              <ScalarProperty Name="ID" ColumnName="PositionID" />
-            </EndProperty>
-            <EndProperty Name="Candidates">
-              <ScalarProperty Name="ID" ColumnName="CandidateID" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="Department_Manager" TypeName="ProjectModel.Department_Manager" StoreEntitySet="Department_Manager">
-            <EndProperty Name="Managers">
-              <ScalarProperty Name="ID" ColumnName="ManagerID" />
-            </EndProperty>
-            <EndProperty Name="Departments">
-              <ScalarProperty Name="ID" ColumnName="DepartmentID" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="Department_Position" TypeName="ProjectModel.Department_Position" StoreEntitySet="Department_Position">
-            <EndProperty Name="Positions">
-              <ScalarProperty Name="ID" ColumnName="PositionID" />
-            </EndProperty>
-            <EndProperty Name="Departments">
-              <ScalarProperty Name="ID" ColumnName="DepartmentID" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="Manager_Position" TypeName="ProjectModel.Manager_Position" StoreEntitySet="Manager_Position">
-            <EndProperty Name="Positions">
-              <ScalarProperty Name="ID" ColumnName="PositionID" />
-            </EndProperty>
-            <EndProperty Name="Managers">
-              <ScalarProperty Name="ID" ColumnName="ManagerID" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="Recruiter_Position" TypeName="ProjectModel.Recruiter_Position" StoreEntitySet="Recruiter_Position">
-            <EndProperty Name="Recruiters">
-              <ScalarProperty Name="ID" ColumnName="RecruiterID" />
-            </EndProperty>
-            <EndProperty Name="Positions">
-              <ScalarProperty Name="ID" ColumnName="PositionID" />
-            </EndProperty>
-          </AssociationSetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

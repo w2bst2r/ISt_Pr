@@ -13,6 +13,7 @@ namespace StajProject.Controllers
     {
         ProjectEntities db = new ProjectEntities();
 
+        [OverrideActionFilters]
         public ActionResult Index()
         {
             return RedirectToAction("ViewGradeList");
@@ -69,7 +70,7 @@ namespace StajProject.Controllers
         public ActionResult ClearForm()
         {
             ModelState.Clear();
-            return View("AddGrade");
+            return RedirectToAction("AddGrade");
         }
 
         [HttpGet]
@@ -108,6 +109,7 @@ namespace StajProject.Controllers
             }
         }
 
+        [OverrideActionFilters]
         public ActionResult ViewGradeList()
         {
             return View(db.Grades.ToList());

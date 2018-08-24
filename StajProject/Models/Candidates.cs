@@ -19,22 +19,20 @@ namespace StajProject.Models
         public Candidates()
         {
             this.Applications = new HashSet<Applications>();
-            this.Positions = new HashSet<Positions>();
+            this.Candidate_Position = new HashSet<Candidate_Position>();
         }
     
         public int ID { get; set; }
-
-        [Display(Name = "Candidate")]
-        public string Name { get; set; }
+        public string FirstName { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }
-        public string Contact { get; set; }
+        public string PhoneNo { get; set; }
         public string Language { get; set; }
         public string State { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Applications> Applications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Positions> Positions { get; set; }
+        public virtual ICollection<Candidate_Position> Candidate_Position { get; set; }
     }
 }

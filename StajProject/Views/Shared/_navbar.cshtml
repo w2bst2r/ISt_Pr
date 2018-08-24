@@ -14,9 +14,6 @@
             background-color: #5b5b5b;
             font-family: Times New Roman, Helvetica, sans-serif;
         }
-
-
-
             .navbar a {
                 float: left;
                 font-size: 19px;
@@ -25,10 +22,7 @@
                 padding: 16px 16px;
                 text-decoration: none;
             }
-
-
-
-                .navbar a:hover, .dropdown:hover .dropbtn {
+            .navbar a:hover, .dropdown:hover .dropbtn {
                     background-color: cadetblue;
                 }
     </style>
@@ -36,12 +30,6 @@
 </head>
 
 <body>
-
-
-
-
-
-
 
     <a href="@Url.Action("Index", "Home")"><span>Home</span></a>
 
@@ -62,20 +50,9 @@
     <a href="@Url.Action("Index", "Question")"><span>Questions</span></a>
 
     <div class="nav navbar-nav navbar-right">
-
         @Html.ActionLink("Register", "Register", "Home", routeValues: null, htmlAttributes: new { id = "registerLink" })
-
         @Html.ActionLink("Log in", "Login", "Home", routeValues: null, htmlAttributes: new { id = "loginLink" })
-
     </div>
-
-
-
-
-
-
-
-
 
 </body>
 

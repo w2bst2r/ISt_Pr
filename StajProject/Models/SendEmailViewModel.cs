@@ -8,13 +8,12 @@ namespace StajProject.Models
 {
     public class SendEmailViewModel
     {
-        [Required]
-        [Display(Name = "First Name")]
+        public int ID { get; set; }
+
         public string FirstName { get; set; }
 
-        [Required]
-        [DataType(DataType.EmailAddress)]
-        [Display(Name = "Email")]
+        public string Surname { get; set; }
+
         public string Email { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using StajProject.Models;
+﻿using StajProject.Filters;
+using StajProject.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,10 +10,12 @@ using System.Web.Mvc;
 
 namespace StajProject.Controllers
 {
+    [AdminFilter]
     public class CandidateController : Controller
     {
         ProjectEntities db = new ProjectEntities();
         // GET: Candidate
+        [OverrideActionFilters]
         public ActionResult Index()
         {
             return RedirectToAction("ViewCandidateList");
@@ -21,6 +24,7 @@ namespace StajProject.Controllers
         [HttpGet]
         public ActionResult AddCandidate()
         {
+
             return View();
         }
 
@@ -35,10 +39,11 @@ namespace StajProject.Controllers
                     db.SaveChanges();
                     return RedirectToAction("ViewCandidateList");
                 }
-                return View(candidate);
+                return View();
             }
-            catch
+            catch (Exception ex)
             {
+                ViewBag.Error = ex.Message;
                 return View();
             }
         }
@@ -65,7 +70,7 @@ namespace StajProject.Controllers
         public ActionResult ClearForm()
         {
             ModelState.Clear();
-            return View("AddCandidate");
+            return RedirectToAction("AddCandidate");
         }
 
         [HttpGet]
@@ -102,6 +107,7 @@ namespace StajProject.Controllers
             }
         }
 
+        [OverrideActionFilters]
         public ActionResult ViewCandidateList()
         {
             return View(db.Candidates.ToList());

@@ -18,17 +18,17 @@ namespace StajProject.Models
         public Recruiters()
         {
             this.Application_Recruiter = new HashSet<Application_Recruiter>();
-            this.Positions = new HashSet<Positions>();
+            this.Recruiter_Position = new HashSet<Recruiter_Position>();
         }
     
         public int ID { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string Title { get; set; }
+        public string PhoneNo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Application_Recruiter> Application_Recruiter { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Positions> Positions { get; set; }
+        public virtual ICollection<Recruiter_Position> Recruiter_Position { get; set; }
     }
 }

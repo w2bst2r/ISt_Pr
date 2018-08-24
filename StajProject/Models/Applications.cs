@@ -25,16 +25,11 @@ namespace StajProject.Models
 
         [Display(Name = "App Id")]
         public int ID { get; set; }
-
-        [Display(Name = "Survey Date")]
-        public string SurveyDate { get; set; }
-
+        public System.DateTime Date { get; set; }
         public int CandidateID { get; set; }
         public int PositionID { get; set; }
         public int GradeID { get; set; }
-
-        [Display(Name ="Is Active" )]
-        public bool isActive { get; set; }
+        public bool IsSent { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Answers> Answers { get; set; }

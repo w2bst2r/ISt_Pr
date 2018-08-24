@@ -3,8 +3,8 @@
 @{
     ViewBag.Title = "ViewPositionList";
 }
-
-<h2>View Position List</h2>
+<br/>
+<h2>View Positions</h2>
 
 <p>
     @Html.ActionLink("Create New", "AddPosition")
@@ -26,7 +26,7 @@ else
                 @Html.DisplayNameFor(model => model.Code)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Status)
+                @Html.DisplayNameFor(model => model.State)
             </th>
             <th></th>
         </tr>
@@ -44,7 +44,7 @@ else
                     @Html.DisplayFor(modelItem => item.Code)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Status)
+                    @Html.DisplayFor(modelItem => item.State)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "EditPosition", new { id = item.ID }) |

@@ -18,20 +18,20 @@ namespace StajProject.Models
         public Managers()
         {
             this.Application_Manager = new HashSet<Application_Manager>();
-            this.Departments = new HashSet<Departments>();
-            this.Positions = new HashSet<Positions>();
+            this.Department_Manager = new HashSet<Department_Manager>();
+            this.Manager_Position = new HashSet<Manager_Position>();
         }
     
         public int ID { get; set; }
-        public string Name { get; set; }
+        public string FirstName { get; set; }
         public string Surname { get; set; }
-        public string Title { get; set; }
+        public string PhoneNo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Application_Manager> Application_Manager { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Departments> Departments { get; set; }
+        public virtual ICollection<Department_Manager> Department_Manager { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Positions> Positions { get; set; }
+        public virtual ICollection<Manager_Position> Manager_Position { get; set; }
     }
 }

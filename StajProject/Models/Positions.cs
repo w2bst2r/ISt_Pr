@@ -19,10 +19,10 @@ namespace StajProject.Models
         public Positions()
         {
             this.Applications = new HashSet<Applications>();
-            this.Candidates = new HashSet<Candidates>();
-            this.Departments = new HashSet<Departments>();
-            this.Managers = new HashSet<Managers>();
-            this.Recruiters = new HashSet<Recruiters>();
+            this.Candidate_Position = new HashSet<Candidate_Position>();
+            this.Department_Position = new HashSet<Department_Position>();
+            this.Manager_Position = new HashSet<Manager_Position>();
+            this.Recruiter_Position = new HashSet<Recruiter_Position>();
         }
     
         public int ID { get; set; }
@@ -30,17 +30,17 @@ namespace StajProject.Models
         [Display(Name = "Position")]
         public string Name { get; set; }
         public string Code { get; set; }
-        public string Status { get; set; }
+        public string State { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Applications> Applications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Candidates> Candidates { get; set; }
+        public virtual ICollection<Candidate_Position> Candidate_Position { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Departments> Departments { get; set; }
+        public virtual ICollection<Department_Position> Department_Position { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Managers> Managers { get; set; }
+        public virtual ICollection<Manager_Position> Manager_Position { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Recruiters> Recruiters { get; set; }
+        public virtual ICollection<Recruiter_Position> Recruiter_Position { get; set; }
     }
 }

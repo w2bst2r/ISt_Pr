@@ -10,7 +10,6 @@ using System.Web.Mvc;
 
 namespace StajProject.Controllers
 {
-    [AdminFilter]
     public class CandidateController : Controller
     {
         ProjectEntities db = new ProjectEntities();

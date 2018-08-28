@@ -14,7 +14,7 @@
         }
             .navbar a {
                 float: left;
-                font-size: 19px;
+                font-size: 18px;
                 color: white;
                 text-align: center;
                 padding: 16px 16px;
@@ -37,6 +37,8 @@
     <a href="@Url.Action("Index", "Grade")"><span>Grades</span></a>
     <a href="@Url.Action("Index", "Department")"><span>Departments</span></a>
     <a href="@Url.Action("Index", "Question")"><span>Questions</span></a>
+    <a href="@Url.Action("Index", "Answer")"><span>Answers</span></a>
+
 
     <div class="nav navbar-nav navbar-right">
         @Html.ActionLink("Log out", "Logout", "Home", routeValues: null, htmlAttributes: new { id = "loginLink" })

@@ -3,13 +3,13 @@
 @{
     ViewBag.Title = "View Question List";
 }
-
-<h2>View Question List</h2>
-
+<br />
+<h2>Question List</h2>
+<br />
 <p>
     @Html.ActionLink("Create New", "AddQuestion")
 </p>
-
+<br />
 @if (!Model.Any())
 {
     <p>We don't have any questions yet.</p>

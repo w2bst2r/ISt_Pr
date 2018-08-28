@@ -3,14 +3,14 @@
 @{
     ViewBag.Title = "ViewApplicationList";
 }
-
-<h2>Applications</h2>
-
+<br />
+<h2>Application List</h2>
+<br />
 <p>
     @Html.ActionLink("Create New", "AddApplication") |
     @Html.ActionLink("Assign Manager", "AssignManager") |
     @Html.ActionLink("Assign Recruiter", "AssignRecruiter")
-
+    <br /><br />
 </p>
 
 @if (!Model.Any())

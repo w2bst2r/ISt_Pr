@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Edit Recruiter";
 }
-
+<br />
 <h2>Edit Recruiter</h2>
 
 @using (Html.BeginForm())
@@ -11,7 +11,6 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Recruiters</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)

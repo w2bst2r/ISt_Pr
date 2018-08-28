@@ -108,6 +108,7 @@
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PhoneNo" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Positions">
           <Key>
@@ -122,7 +123,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Question" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Recruiter_Position">
@@ -174,9 +175,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Answers_Questions">
-          <End Role="Questions" Type="Self.Questions" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
           <End Role="Answers" Type="Self.Answers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Questions">
@@ -526,7 +525,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="ProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="ProjectEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Recruiters" EntityType="ProjectModel.Recruiters" />
           <EntitySet Name="Answers" EntityType="ProjectModel.Answers" />
           <EntitySet Name="Application_Manager" EntityType="ProjectModel.Application_Manager" />
           <EntitySet Name="Application_Recruiter" EntityType="ProjectModel.Application_Recruiter" />
@@ -542,6 +540,7 @@
           <EntitySet Name="Positions" EntityType="ProjectModel.Positions" />
           <EntitySet Name="Questions" EntityType="ProjectModel.Questions" />
           <EntitySet Name="Recruiter_Position" EntityType="ProjectModel.Recruiter_Position" />
+          <EntitySet Name="Recruiters" EntityType="ProjectModel.Recruiters" />
           <EntitySet Name="Registrations" EntityType="ProjectModel.Registrations" />
           <EntitySet Name="sysdiagrams" EntityType="ProjectModel.sysdiagrams" />
           <AssociationSet Name="FK_Answers_Applications" Association="ProjectModel.FK_Answers_Applications">
@@ -620,18 +619,7 @@
             <End Role="Recruiters" EntitySet="Recruiters" />
             <End Role="Recruiter_Position" EntitySet="Recruiter_Position" />
           </AssociationSet>
-          </EntityContainer>
-        <EntityType Name="Recruiters">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Application_Recruiter" Relationship="ProjectModel.FK_Application_Recruiter_Recruiters1" FromRole="Recruiters" ToRole="Application_Recruiter" />
-          <NavigationProperty Name="Recruiter_Position" Relationship="ProjectModel.FK_Recruiter_Position_Recruiters" FromRole="Recruiters" ToRole="Recruiter_Position" />
-        </EntityType>
+        </EntityContainer>
         <EntityType Name="Answers">
           <Key>
             <PropertyRef Name="QuestionID" />
@@ -760,6 +748,7 @@
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Application_Manager" Relationship="ProjectModel.FK_Application_Manager_Managers" FromRole="Managers" ToRole="Application_Manager" />
           <NavigationProperty Name="Department_Manager" Relationship="ProjectModel.FK_Department_Manager_Managers" FromRole="Managers" ToRole="Department_Manager" />
           <NavigationProperty Name="Manager_Position" Relationship="ProjectModel.FK_Manager_Position_Managers" FromRole="Managers" ToRole="Manager_Position" />
@@ -782,7 +771,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Question" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Answers" Relationship="ProjectModel.FK_Answers_Questions" FromRole="Questions" ToRole="Answers" />
         </EntityType>
@@ -795,6 +784,17 @@
           <Property Name="PositionID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Positions" Relationship="ProjectModel.FK_Recruiter_Position_Positions" FromRole="Recruiter_Position" ToRole="Positions" />
           <NavigationProperty Name="Recruiters" Relationship="ProjectModel.FK_Recruiter_Position_Recruiters" FromRole="Recruiter_Position" ToRole="Recruiters" />
+        </EntityType>
+        <EntityType Name="Recruiters">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Application_Recruiter" Relationship="ProjectModel.FK_Application_Recruiter_Recruiters1" FromRole="Recruiters" ToRole="Application_Recruiter" />
+          <NavigationProperty Name="Recruiter_Position" Relationship="ProjectModel.FK_Recruiter_Position_Recruiters" FromRole="Recruiters" ToRole="Recruiter_Position" />
         </EntityType>
         <EntityType Name="Registrations">
           <Key>
@@ -828,9 +828,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Answers_Questions">
-          <End Type="ProjectModel.Questions" Role="Questions" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Type="ProjectModel.Questions" Role="Questions" Multiplicity="1" />
           <End Type="ProjectModel.Answers" Role="Answers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Questions">
@@ -1085,16 +1083,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ProjectModelStoreContainer" CdmEntityContainer="ProjectEntities">
-          <EntitySetMapping Name="Recruiters">
-            <EntityTypeMapping TypeName="ProjectModel.Recruiters">
-              <MappingFragment StoreEntitySet="Recruiters">
-                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
-                <ScalarProperty Name="Surname" ColumnName="Surname" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Answers">
             <EntityTypeMapping TypeName="ProjectModel.Answers">
               <MappingFragment StoreEntitySet="Answers">
@@ -1203,6 +1191,7 @@
           <EntitySetMapping Name="Managers">
             <EntityTypeMapping TypeName="ProjectModel.Managers">
               <MappingFragment StoreEntitySet="Managers">
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -1237,6 +1226,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Recruiters">
+            <EntityTypeMapping TypeName="ProjectModel.Recruiters">
+              <MappingFragment StoreEntitySet="Recruiters">
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Registrations">
             <EntityTypeMapping TypeName="ProjectModel.Registrations">
               <MappingFragment StoreEntitySet="Registrations">
@@ -1256,7 +1255,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          </EntityContainerMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

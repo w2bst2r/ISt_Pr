@@ -43,6 +43,12 @@ else
             <th>
                 @Html.DisplayNameFor(model => model.IsSent)
             </th>
+            <th>
+                 Manager
+            </th>
+            <th>
+                 Recruiter
+            </th>
             <th>  </th>
 
         </tr>
@@ -52,7 +58,7 @@ else
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ID)
+                    @Html.DisplayFor(model => item.ID)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Date)
@@ -71,6 +77,12 @@ else
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.IsSent)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Application_Manager.Managers.Fullname)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Application_Recruiter.Recruiters.Fullname)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "EditApplication", new { id = item.ID }) |

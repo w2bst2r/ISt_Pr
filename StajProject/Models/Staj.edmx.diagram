@@ -4,25 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5e4b227d7bc042d5a975b831314b7ea2" Name="Diagram1" ZoomLevel="10">
-        <EntityTypeShape EntityType="ProjectModel.Answers" Width="1.5" PointX="8.25" PointY="10" />
-        <EntityTypeShape EntityType="ProjectModel.Application_Manager" Width="1.5" PointX="8.25" PointY="13" />
-        <EntityTypeShape EntityType="ProjectModel.Application_Recruiter" Width="1.5" PointX="8.25" PointY="7" />
-        <EntityTypeShape EntityType="ProjectModel.Applications" Width="1.5" PointX="6" PointY="9.375" />
-        <EntityTypeShape EntityType="ProjectModel.Candidate_Position" Width="1.5" PointX="3" PointY="7" />
-        <EntityTypeShape EntityType="ProjectModel.Candidates" Width="1.5" PointX="0.75" PointY="5.625" />
-        <EntityTypeShape EntityType="ProjectModel.Department_Manager" Width="1.5" PointX="11.25" PointY="10.75" />
-        <EntityTypeShape EntityType="ProjectModel.Department_Position" Width="1.5" PointX="6" PointY="6" />
-        <EntityTypeShape EntityType="ProjectModel.Departments" Width="1.5" PointX="3.75" PointY="4.125" />
+      <Diagram DiagramId="5e4b227d7bc042d5a975b831314b7ea2" Name="Diagram1" ZoomLevel="33">
+        <EntityTypeShape EntityType="ProjectModel.Answers" Width="1.5" PointX="8.25" PointY="10.25" />
+        <EntityTypeShape EntityType="ProjectModel.Application_Manager" Width="1.5" PointX="8.25" PointY="7.25" />
+        <EntityTypeShape EntityType="ProjectModel.Application_Recruiter" Width="1.5" PointX="8.25" PointY="13.25" />
+        <EntityTypeShape EntityType="ProjectModel.Applications" Width="1.5" PointX="6" PointY="9.625" />
+        <EntityTypeShape EntityType="ProjectModel.Candidate_Position" Width="1.5" PointX="3" PointY="10.25" />
+        <EntityTypeShape EntityType="ProjectModel.Candidates" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ProjectModel.Department_Manager" Width="1.5" PointX="6" PointY="3.5" />
+        <EntityTypeShape EntityType="ProjectModel.Department_Position" Width="1.5" PointX="6" PointY="6.25" />
+        <EntityTypeShape EntityType="ProjectModel.Departments" Width="1.5" PointX="3.75" PointY="4.375" />
         <EntityTypeShape EntityType="ProjectModel.Grades" Width="1.5" PointX="3.75" PointY="16.25" />
-        <EntityTypeShape EntityType="ProjectModel.Manager_Position" Width="1.5" PointX="3" PointY="13" />
-        <EntityTypeShape EntityType="ProjectModel.Managers" Width="1.5" PointX="6" PointY="16.75" />
-        <EntityTypeShape EntityType="ProjectModel.Positions" Width="1.5" PointX="0.75" PointY="9.625" />
-        <EntityTypeShape EntityType="ProjectModel.Questions" Width="1.5" PointX="6" PointY="14.25" />
-        <EntityTypeShape EntityType="ProjectModel.Recruiter_Position" Width="1.5" PointX="3" PointY="10" />
-        <EntityTypeShape EntityType="ProjectModel.Recruiters" Width="1.5" PointX="6" PointY="3" />
-        <EntityTypeShape EntityType="ProjectModel.Registrations" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="ProjectModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ProjectModel.Manager_Position" Width="1.5" PointX="3" PointY="7.25" />
+        <EntityTypeShape EntityType="ProjectModel.Managers" Width="1.5" PointX="0.75" PointY="6" />
+        <EntityTypeShape EntityType="ProjectModel.Positions" Width="1.5" PointX="0.75" PointY="9.875" />
+        <EntityTypeShape EntityType="ProjectModel.Questions" Width="1.5" PointX="6" PointY="14.5" />
+        <EntityTypeShape EntityType="ProjectModel.Recruiter_Position" Width="1.5" PointX="3" PointY="13.25" />
+        <EntityTypeShape EntityType="ProjectModel.Recruiters" Width="1.5" PointX="6" PointY="17.25" />
+        <EntityTypeShape EntityType="ProjectModel.Registrations" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="ProjectModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="1" />
         <AssociationConnector Association="ProjectModel.FK_Answers_Applications" />
         <AssociationConnector Association="ProjectModel.FK_Answers_Questions" />
         <AssociationConnector Association="ProjectModel.FK_Application_Manager_Applications" />

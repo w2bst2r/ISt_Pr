@@ -105,14 +105,11 @@ namespace StajProject.Controllers
         //--------------------Email Part End--------------------------------------------------
         public ActionResult AssignManager()
         {
-            if (Session["Email"] != null)
-            {
                 ViewBag.ApplicationList = new SelectList(db.Applications, "ID", "ID");
                 ViewBag.ManagerList = new SelectList(db.Managers, "ID", "FirstName");
                 return View();
-            }
-            else return RedirectToAction("login","Home");
-        }
+         }
+       
 
         [HttpPost]
         public ActionResult AssignManager(Application_Manager application_manager)
@@ -230,6 +227,8 @@ namespace StajProject.Controllers
                 ViewBag.CandidateList = new SelectList(db.Candidates, "ID", "FirstName");
                 ViewBag.PositionList = new SelectList(db.Positions, "ID", "Name");
                 ViewBag.GradeList = new SelectList(db.Grades, "ID", "Name");
+                ViewBag.ManagerList = new SelectList(db.Managers, "ID", "FullName");
+                ViewBag.RecruiterList = new SelectList(db.Grades, "ID", "FullName");
                 if (id == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -241,10 +240,9 @@ namespace StajProject.Controllers
                 }
                 return View(application);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                ViewBag.Error = ex.InnerException;
-                return View();
+                throw;
             }
         }
 
@@ -256,17 +254,19 @@ namespace StajProject.Controllers
                 ViewBag.CandidateList = new SelectList(db.Candidates, "ID", "FirstName");
                 ViewBag.PositionList = new SelectList(db.Positions, "ID", "Name");
                 ViewBag.GradeList = new SelectList(db.Grades, "ID", "Name");
+                ViewBag.ManagerList = new SelectList(db.Managers, "ID", "FullName");
+                ViewBag.RecruiterList = new SelectList(db.Grades, "ID", "FullName");
                 if (ModelState.IsValid)
                 {
                     db.Entry(application).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                return View(application);
+                else return Content("Model state is not Valid");
             }
-            catch
+            catch(Exception)
             {
-                return View();
+                throw;
             }
         }
 
@@ -274,6 +274,8 @@ namespace StajProject.Controllers
         public ActionResult ViewApplicationList()
         {
             //var dsaf = db.Application_Manager.Where(x => x.ApplicationID == x.Applications.ID).FirstOrDefault();
+            var dsaf = db.Applications.ToList();
+
             return View(db.Applications.ToList());
         }
 

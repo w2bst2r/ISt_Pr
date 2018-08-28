@@ -17,7 +17,7 @@
         </EntityType>
         <EntityType Name="Application_Manager">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ApplicationID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ApplicationID" Type="int" Nullable="false" />
@@ -25,7 +25,7 @@
         </EntityType>
         <EntityType Name="Application_Recruiter">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ApplicationID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ApplicationID" Type="int" Nullable="false" />
@@ -187,10 +187,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Application_Manager_Applications">
-          <End Role="Applications" Type="Self.Applications" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Application_Manager" Type="Self.Application_Manager" Multiplicity="*" />
+          <End Role="Applications" Type="Self.Applications" Multiplicity="1" />
+          <End Role="Application_Manager" Type="Self.Application_Manager" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Applications">
               <PropertyRef Name="ID" />
@@ -201,9 +199,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Application_Manager_Managers">
-          <End Role="Managers" Type="Self.Managers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="Managers" Type="Self.Managers" Multiplicity="1" />
           <End Role="Application_Manager" Type="Self.Application_Manager" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Managers">
@@ -215,10 +211,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Application_Recruiter_Applications1">
-          <End Role="Applications" Type="Self.Applications" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Application_Recruiter" Type="Self.Application_Recruiter" Multiplicity="*" />
+          <End Role="Applications" Type="Self.Applications" Multiplicity="1" />
+          <End Role="Application_Recruiter" Type="Self.Application_Recruiter" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Applications">
               <PropertyRef Name="ID" />
@@ -229,9 +223,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Application_Recruiter_Recruiters1">
-          <End Role="Recruiters" Type="Self.Recruiters" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="Recruiters" Type="Self.Recruiters" Multiplicity="1" />
           <End Role="Application_Recruiter" Type="Self.Application_Recruiter" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Recruiters">
@@ -634,7 +626,7 @@
         </EntityType>
         <EntityType Name="Application_Manager">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ApplicationID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ApplicationID" Type="Int32" Nullable="false" />
@@ -644,7 +636,7 @@
         </EntityType>
         <EntityType Name="Application_Recruiter">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ApplicationID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ApplicationID" Type="Int32" Nullable="false" />
@@ -840,10 +832,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Application_Manager_Applications">
-          <End Type="ProjectModel.Applications" Role="Applications" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="ProjectModel.Application_Manager" Role="Application_Manager" Multiplicity="*" />
+          <End Type="ProjectModel.Applications" Role="Applications" Multiplicity="1" />
+          <End Type="ProjectModel.Application_Manager" Role="Application_Manager" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Applications">
               <PropertyRef Name="ID" />
@@ -854,9 +844,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Application_Manager_Managers">
-          <End Type="ProjectModel.Managers" Role="Managers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Type="ProjectModel.Managers" Role="Managers" Multiplicity="1" />
           <End Type="ProjectModel.Application_Manager" Role="Application_Manager" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Managers">
@@ -868,10 +856,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Application_Recruiter_Applications1">
-          <End Type="ProjectModel.Applications" Role="Applications" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="ProjectModel.Application_Recruiter" Role="Application_Recruiter" Multiplicity="*" />
+          <End Type="ProjectModel.Applications" Role="Applications" Multiplicity="1" />
+          <End Type="ProjectModel.Application_Recruiter" Role="Application_Recruiter" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Applications">
               <PropertyRef Name="ID" />
@@ -882,9 +868,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Application_Recruiter_Recruiters1">
-          <End Type="ProjectModel.Recruiters" Role="Recruiters" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Type="ProjectModel.Recruiters" Role="Recruiters" Multiplicity="1" />
           <End Type="ProjectModel.Application_Recruiter" Role="Application_Recruiter" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Recruiters">

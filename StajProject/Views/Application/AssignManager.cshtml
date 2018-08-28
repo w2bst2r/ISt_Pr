@@ -7,7 +7,7 @@
     
     <div class="form-horizontal">
         <br />
-        <h2>Assign Application to Manager</h2>
+        <h2>Assign Application to  a Manager</h2>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -34,6 +34,8 @@
         </div>
     </div>
 }
+
+<div style="color:red">@ViewBag.Error</div>
 
 <div>
     @Html.ActionLink("Back to List", "Index")

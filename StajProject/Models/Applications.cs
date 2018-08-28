@@ -18,8 +18,6 @@ namespace StajProject.Models
         public Applications()
         {
             this.Answers = new HashSet<Answers>();
-            this.Application_Manager = new HashSet<Application_Manager>();
-            this.Application_Recruiter = new HashSet<Application_Recruiter>();
         }
     
         public int ID { get; set; }
@@ -31,10 +29,8 @@ namespace StajProject.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Answers> Answers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Application_Manager> Application_Manager { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Application_Recruiter> Application_Recruiter { get; set; }
+        public virtual Application_Manager Application_Manager { get; set; }
+        public virtual Application_Recruiter Application_Recruiter { get; set; }
         public virtual Candidates Candidates { get; set; }
         public virtual Grades Grades { get; set; }
         public virtual Positions Positions { get; set; }

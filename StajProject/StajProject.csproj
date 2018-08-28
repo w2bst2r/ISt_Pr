@@ -170,6 +170,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AnswerController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\CandidateController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
@@ -184,6 +185,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Answers.cs">
       <DependentUpon>Staj.tt</DependentUpon>
@@ -277,6 +279,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AnswerList.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -471,7 +474,8 @@
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
     <Content Include="Content\templates\WelcomeEmail.cshtml" />
-    <None Include="Properties\PublishProfiles\Test.pubxml" />
+    <None Include="Properties\PublishProfiles\DefactoApp - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\DefactoApp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -561,7 +565,9 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\SurveyForm.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -599,11 +605,10 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Candidate\AddCandidate.cshtml" />
     <Content Include="Views\Candidate\EditCandidate.cshtml" />
-    <Content Include="Views\Candidate\SubmitSurvey.cshtml" />
+    <Content Include="Views\Candidate\SubmitSurvey_toDelete.cshtml" />
     <Content Include="Views\Candidate\ViewCandidateList.cshtml" />
     <Content Include="Views\Candidate\DeleteCandidate.cshtml" />
     <Content Include="Views\Application\ViewApplicationList.cshtml" />
-    <Content Include="Content\templates\Survey.cshtml" />
     <Content Include="Views\Application\EditApplication.cshtml" />
     <Content Include="Views\Position\AddPosition.cshtml" />
     <Content Include="Views\Position\ViewPositionList.cshtml" />
@@ -637,10 +642,11 @@
     <Content Include="Views\Application\EmailSent.cshtml" />
     <Content Include="Views\Application\AddApplication.cshtml" />
     <Content Include="Views\Application\SendEmail.cshtml" />
-    <Content Include="Views\Application\SendSurvey.cshtml" />
+    <Content Include="Views\Application\SubmitSurvey.cshtml" />
     <Content Include="Views\Shared\_SurveyLayout.cshtml" />
     <Content Include="Views\Home\IndexAfterLogIn.cshtml" />
     <Content Include="Views\Shared\_navbarAfterLogin.cshtml" />
+    <Content Include="Views\Answer\ViewAnswerList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

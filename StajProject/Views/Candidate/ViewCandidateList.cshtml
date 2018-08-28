@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "ViewCandidateList";
 }
-
 <br />
 <h2>Candidate List</h2>
 <br />
@@ -11,7 +10,6 @@
     @Html.ActionLink("Insert New Candidate", "AddCandidate")
 </p>
 <br />
-
 
 @if (!Model.Any())
 {
@@ -70,6 +68,7 @@ else
                 <td>
                     @Html.ActionLink("Edit", "EditCandidate", new { id = item.ID }) |
                     @Html.ActionLink("Delete", "DeleteCandidate", new { id = item.ID })
+                    @Html.ActionLink("Send Survey", "SendEmail", new { id = item.ID, email = item.Email, FirstName = item.FirstName, Surname = item.Surname })
                 </td>
             </tr>
 

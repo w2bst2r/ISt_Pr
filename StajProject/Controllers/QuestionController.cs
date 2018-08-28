@@ -10,7 +10,6 @@ using System.Web.Mvc;
 
 namespace StajProject.Controllers
 {
-    [AdminFilter]
     public class QuestionController : Controller
     {
         ProjectEntities db = new ProjectEntities();
@@ -32,7 +31,7 @@ namespace StajProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddQuestion([Bind(Include = "ID,Question")] Questions question_parameter_)
+        public ActionResult AddQuestion(Questions question_parameter_)
         {
             try
             {
@@ -92,18 +91,18 @@ namespace StajProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditQuestion(Questions question)
+        public ActionResult EditQuestion(Questions question_parameter_)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
 
-                    db.Entry(question).State = EntityState.Modified;
+                    db.Entry(question_parameter_).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                return View(question);
+                return View(question_parameter_);
             }
             catch
             {

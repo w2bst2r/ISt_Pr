@@ -1,0 +1,68 @@
+﻿@model IEnumerable<StajProject.Models.Answers>
+
+@{
+    ViewBag.Title = "ViewAnswerList";
+}
+<br />
+<h2>Answer List</h2>
+<br />
+
+
+@if (!Model.Any())
+{
+    <p>No answer is available</p>
+}
+else
+{
+    <table class="table" id="Applications">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ApplicationID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Questions.Question)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CandidateAnswer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ManagerAnswer)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApplicationID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Questions.Question)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CandidateAnswer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ManagerAnswer)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#Applications").DataTable();
+
+            $("#Applications .js-delete").on("click", function() {
+                confirm("are you sure you want to delete this customer");
+            });
+        });
+    </script>
+}

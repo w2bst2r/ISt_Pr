@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -10,11 +11,15 @@ namespace StajProject.Models
     [MetadataType(typeof(CandidatesMetaData))]
     public partial class Candidates
     {
+        [NotMapped]
+        public string Fullname
+        {
+            get { return string.Format("{0} {1}", FirstName, Surname); }
+        }
     }
 
     public class CandidatesMetaData
     {
-
         public int ID { get; set; }
 
         [Display(Name = "First Name")]

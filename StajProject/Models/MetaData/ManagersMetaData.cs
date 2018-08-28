@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -10,6 +11,11 @@ namespace StajProject.Models
     [MetadataType(typeof(ManagersMetaData))]
     public partial class Managers
     {
+        [NotMapped]
+        public string Fullname
+        {
+            get { return string.Format("{0} {1}", FirstName, Surname); }
+        }
     }
 
     public class ManagersMetaData
@@ -25,5 +31,9 @@ namespace StajProject.Models
         [Display(Name = "Phone No")]
         [Phone]
         public string PhoneNo { get; set; }
+
+        [Display(Name = "Email")]
+        [EmailAddress]
+        public string Email { get; set; }
     }
 }

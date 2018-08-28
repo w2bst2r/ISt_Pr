@@ -1,0 +1,142 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_SurveyLayout.cshtml";
+    ViewBag.applicationID = ViewBag.applicationID;
+}
+@*<ul>
+        <li>
+            @Html.RadioButtonFor(m => m.CandidateAnswer, "1")
+            @Html.Label("Excellent")
+        </li>
+        <li>
+            @Html.RadioButtonFor(m => m.CandidateAnswer, "2")
+            @Html.Label("adsfasdf")
+        </li>
+    </ul>*@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recruiter Survey</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Elegant Feedback Form  Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+               function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href="~/ElegantLayout/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+</head>
+
+<body class="agileits_w3layouts">
+    <h1 class="agile_head text-center">Recruiter Evaluation Form</h1>
+    <div class="w3layouts_main wrap">
+
+        <h3>Please Fill in the Survey, it may take you a couple of minutes.</h3>
+        <form action="/Application/SubmitSurvey/@ViewBag.applicationID" method="post" class="agile_form">
+
+            <h2>@ViewBag.questionList[0]</h2>
+            <ul class="agile_info_select">
+                <li>
+                    <input type="radio" name="Answer1" id="CandidateAnswer1" value="Excellent" checked="checked">
+                    <label for="CandidateAnswer1">Excellent</label>
+                    <div class="check w3ls"></div>
+                </li>
+                <li>
+                    <input type="radio" name="Answer1" id="CandidateAnswer2" value="Good">
+                    <label for="CandidateAnswer2"> Good</label>
+                    <div class="check w3ls"></div>
+                </li>
+                <li>
+                    <input type="radio" name="Answer1" id="CandidateAnswer3" value="Neutral">
+                    <label for="CandidateAnswer3">Neutral</label>
+                    <div class="check wthree"></div>
+                </li>
+                <li>
+                    <input type="radio" name="Answer1" id="CandidateAnswer4" value="Poor">
+                    <label for="CandidateAnswer4">Poor</label>
+                    <div class="check wthree"></div>
+                </li>
+                <li>
+                    <input type="radio" name="Answer1" id="CandidateAnswer5" value="Very poor">
+                    <label for="CandidateAnswer5">Very poor</label>
+                    <div class="check wthree"></div>
+                </li>
+            </ul>
+
+            <h2>@ViewBag.questionList[1]</h2>
+            <ul class="agile_info_select">
+                <li>
+                    <input type="radio" name="Answer2" id="CandidateAnswer6" value="Excellent</" checked="checked">
+                    <label for="CandidateAnswer6">Excellent</label>
+                    <div class="check w3ls"></div>
+                </li>
+                <li>
+                    <input type="radio" name="Answer2" id="CandidateAnswer7" value="Good">
+                    <label for="CandidateAnswer7"> Good</label>
+                    <div class="check w3ls"></div>
+                </li>
+                <li>
+                    <input type="radio" name="Answer2" id="CandidateAnswer8" value="Neutral">
+                    <label for="CandidateAnswer8">Neutral</label>
+                    <div class="check wthree"></div>
+                </li>
+                <li>
+                    <input type="radio" name="Answer2" id="CandidateAnswer9" value="Poor">
+                    <label for="CandidateAnswer9">Poor</label>
+                    <div class="check wthree"></div>
+                </li>
+                <li>
+                    <input type="radio" name="Answer2" id="CandidateAnswer10" value="Very poor">
+                    <label for="CandidateAnswer10">Very poor</label>
+                    <div class="check wthree"></div>
+                </li>
+            </ul>
+
+            <h2>@ViewBag.questionList[2]</h2>
+            <ul class="agile_info_select">
+                <li>
+                    <input type="radio" name="Answer3" id="CandidateAnswer11" value="Excellent" checked="checked">
+                    <label for="CandidateAnswer11">Excellent</label>
+                    <div class="check w3ls"></div>
+                </li>
+                <li>
+                    <input type="radio" name="Answer3" id="CandidateAnswer12" value="Good">
+                    <label for="CandidateAnswer12"> Good</label>
+                    <div class="check w3ls"></div>
+                </li>
+                <li>
+                    <input type="radio" name="Answer3" id="CandidateAnswer13" value="Neutral">
+                    <label for="CandidateAnswer13">Neutral</label>
+                    <div class="check wthree"></div>
+                </li>
+                <li>
+                    <input type="radio" name="Answer3" id="CandidateAnswer14" value="Poor">
+                    <label for="CandidateAnswer14">Poor</label>
+                    <div class="check wthree"></div>
+                </li>
+                <li>
+                    <input type="radio" name="Answer3" id="CandidateAnswer15" value="Very poor">
+                    <label for="CandidateAnswer15">Very poor</label>
+                    <div class="check wthree"></div>
+                </li>
+            </ul>
+
+
+
+            <h2>You're done! Thanks for your time!</h2>
+            <div class="text-center"> <input type="submit" name="Submit" />)
+ </div>
+        </form>
+    </div>
+
+
+    <div class="agileits_copyright text-center">
+        <p>© Recruiter Form</p>
+    </div>
+</body>
+</html>
+
+

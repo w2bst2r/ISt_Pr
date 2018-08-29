@@ -193,12 +193,6 @@
     <Compile Include="Models\Applications.cs">
       <DependentUpon>Staj.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Application_Manager.cs">
-      <DependentUpon>Staj.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Application_Recruiter.cs">
-      <DependentUpon>Staj.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Candidates.cs">
       <DependentUpon>Staj.tt</DependentUpon>
     </Compile>
@@ -605,7 +599,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Candidate\AddCandidate.cshtml" />
     <Content Include="Views\Candidate\EditCandidate.cshtml" />
-    <Content Include="Views\Candidate\SubmitSurvey_toDelete.cshtml" />
     <Content Include="Views\Candidate\ViewCandidateList.cshtml" />
     <Content Include="Views\Candidate\DeleteCandidate.cshtml" />
     <Content Include="Views\Application\ViewApplicationList.cshtml" />

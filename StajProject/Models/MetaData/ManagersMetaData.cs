@@ -11,8 +11,7 @@ namespace StajProject.Models
     [MetadataType(typeof(ManagersMetaData))]
     public partial class Managers
     {
-        [NotMapped]
-        public string Fullname
+        public string FullName
         {
             get { return string.Format("{0} {1}", FirstName, Surname); }
         }
@@ -21,6 +20,10 @@ namespace StajProject.Models
     public class ManagersMetaData
     {
         public int ID { get; set; }
+
+        [NotMapped]
+        [Display(Name = "Manager")]
+        public string FullName { get; set; }
 
         [Display(Name = "First Name")]
         public string FirstName { get; set; }

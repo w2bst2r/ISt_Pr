@@ -17,7 +17,7 @@ namespace StajProject.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Managers()
         {
-            this.Application_Manager = new HashSet<Application_Manager>();
+            this.Applications = new HashSet<Applications>();
             this.Department_Manager = new HashSet<Department_Manager>();
             this.Manager_Position = new HashSet<Manager_Position>();
         }
@@ -29,7 +29,7 @@ namespace StajProject.Models
         public string Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Application_Manager> Application_Manager { get; set; }
+        public virtual ICollection<Applications> Applications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Department_Manager> Department_Manager { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -59,9 +59,9 @@ namespace StajProject.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+                throw;
             }
         }
 

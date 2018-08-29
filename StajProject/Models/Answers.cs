@@ -19,7 +19,6 @@ namespace StajProject.Models
         public string CandidateAnswer { get; set; }
         public string ManagerAnswer { get; set; }
     
-        public virtual Applications Applications { get; set; }
         public virtual Questions Questions { get; set; }
     }
 }

@@ -26,8 +26,6 @@ namespace StajProject.Models
         }
     
         public virtual DbSet<Answers> Answers { get; set; }
-        public virtual DbSet<Application_Manager> Application_Manager { get; set; }
-        public virtual DbSet<Application_Recruiter> Application_Recruiter { get; set; }
         public virtual DbSet<Applications> Applications { get; set; }
         public virtual DbSet<Candidate_Position> Candidate_Position { get; set; }
         public virtual DbSet<Candidates> Candidates { get; set; }

@@ -8,12 +8,15 @@ namespace StajProject.Models
 {
     public class SendEmailViewModel
     {
-        public int ID { get; set; }
+        public int ApplicationID { get; set; }
 
-        public string FirstName { get; set; }
+        public string CandidateFullName { get; set; }
 
-        public string Surname { get; set; }
+        public string ManagerFullName { get; set; }
 
-        public string Email { get; set; }
+        public string CandidateEmail { get; set; }
+
+        public string ManagerEmail { get; set; }
+
     }
 }

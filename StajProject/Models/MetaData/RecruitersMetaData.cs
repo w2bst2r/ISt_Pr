@@ -11,8 +11,7 @@ namespace StajProject.Models
     [MetadataType(typeof(RecruitersMetaData))]
     public partial class Recruiters
     {
-        [NotMapped]
-        public string Fullname
+        public string FullName
         {
             get { return string.Format("{0} {1}", Name, Surname); }
         }
@@ -20,6 +19,11 @@ namespace StajProject.Models
 
     public class RecruitersMetaData
     {
+
+        [Display(Name = "Recruiter")]
+        [NotMapped]
+        public string FullName { get; set; }
+
         public int ID { get; set; }
 
         [Display(Name = "Name")]

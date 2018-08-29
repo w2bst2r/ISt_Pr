@@ -24,42 +24,35 @@ namespace StajProject.Controllers
         {
             return RedirectToAction("ViewApplicationList");
         }
-        //--------------------Email Part--------------------------------------------------
-        //this is just to see the survey sent
 
-        //public static async Task<string> EMailTemplate(string template)
-        //{
-        //    var templateFilePath = HostingEnvironment.MapPath("~/Content/templates/") + template + ".cshtml";
-        //    StreamReader objstreamreaderfile = new StreamReader(templateFilePath);
-        //    var body = await objstreamreaderfile.ReadToEndAsync();
-        //    objstreamreaderfile.Close();
-        //    return body;
-        //}
-
-
-            //this runs when Send Survey is clicked on
         public async Task<ActionResult> SendEmail(SendEmailViewModel model)
         {
-            //message contains the body of the email
-            //var message = await EMailTemplate("WelcomeEmail");
-            //replace all occurence of ViewBag.Name with the name
-            //message = message.Replace("@ViewBag.Name", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(model.FirstName));
-            if (db.Applications.Find(model.ID)!= null)
+            try
             {
-                db.Applications.Find(model.ID).IsSent = true;
-                db.SaveChanges();
-            }
-            var mailbody = $@"Hello {model.FirstName} {model.Surname}, <br /><br />   
-            Please complete the survey in the link below: http://http://localhost:63481/Application/SubmitSurvey/?applicationID={model.ID} <br />
+                if (db.Applications.Find(model.ApplicationID) != null)
+                {
+                    db.Applications.Find(model.ApplicationID).IsSent = true;
+                    db.SaveChanges();
+                }
+            var candidateMail = $@"Hello {model.CandidateFullName}, <br /><br />   
+            Please complete the survey in the link below: http://localhost:63481/Application/SubmitSurvey/?applicationID={model.ApplicationID}&isCandidate=true <br />
             If you encounter any problem, please contact the administrator  <br /><br />             
             Cheers, ";
-            await MessageServices.SendEmailAsync(model.Email, "Welcome!", mailbody);
-            ModelState.AddModelError("", "An Error has occured");
-            return RedirectToAction("EmailSent");
+            var managerMail = $@"Hello {model.ManagerFullName}, <br /><br />   
+            Please complete the survey in the link below: http://http://localhost:63481/Application/SubmitSurvey/?applicationID={model.ApplicationID}&isCandidate=false <br />
+            If you encounter any problem, please contact the administrator  <br /><br />             
+            Cheers, ";
+                await MessageServices.SendEmailAsync(model.CandidateEmail, "Welcome!", candidateMail);
+                await MessageServices.SendEmailAsync(model.ManagerEmail, "Welcome!", managerMail);
+                return RedirectToAction("EmailSent");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-
-        public ActionResult SubmitSurvey(int applicationID)
+        public ActionResult SubmitSurvey(int applicationID, bool isCandidate)
         {
             try
             {
@@ -67,11 +60,12 @@ namespace StajProject.Controllers
                 ViewBag.questionList = questionList;
                 TempData["applicationID"] = applicationID;
                 TempData.Keep("applicationID");
+                TempData["isCandidate"] = isCandidate;
+                TempData.Keep("isCandidate");
                 return View();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                ViewBag.Error = ex.Message;
                 throw;
             }
         }
@@ -79,95 +73,73 @@ namespace StajProject.Controllers
         [HttpPost]
         public ActionResult SubmitSurvey(AnswerList answers)
         {
-            try
+            if (ModelState.IsValid)
             {
-                var questionList = db.Questions.Select(x => x.Question).ToList();
-                ViewBag.questionList = questionList;
-                var applicationID= TempData["applicationID"];
-
-                db.Answers.Add(new Answers { ApplicationID = (int)applicationID, QuestionID = 1, CandidateAnswer = answers.Answer1, ManagerAnswer = null });
-                db.Answers.Add(new Answers { ApplicationID = (int)applicationID, QuestionID = 2, CandidateAnswer = answers.Answer2, ManagerAnswer = null });
-                db.Answers.Add(new Answers {ApplicationID = (int)applicationID, QuestionID = 3, CandidateAnswer = answers.Answer3, ManagerAnswer = null });
-                db.SaveChanges();
-                return RedirectToAction("ViewAnswerList", "Answer");
+                try
+                {
+                    ViewBag.questionList = db.Questions.Select(x => x.Question).ToList();
+                    var applicationID = TempData["applicationID"];
+                    bool isCandidate = (bool)TempData["isCandidate"];
+                    var rowToUpdate1 = db.Answers.Find(1, applicationID);
+                    var rowToUpdate2 = db.Answers.Find(2, applicationID);
+                    var rowToUpdate3 = db.Answers.Find(3, applicationID);
+                    if (isCandidate)
+                    {
+                        if (rowToUpdate1 != null && rowToUpdate2 != null && rowToUpdate3 != null)
+                        {
+                            rowToUpdate1.CandidateAnswer = answers.Answer1;
+                            rowToUpdate2.CandidateAnswer = answers.Answer1;
+                            rowToUpdate3.CandidateAnswer = answers.Answer1;
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            db.Answers.Add(new Answers { ApplicationID = (int)applicationID, QuestionID = 1, CandidateAnswer = answers.Answer1 });
+                            db.Answers.Add(new Answers { ApplicationID = (int)applicationID, QuestionID = 2, CandidateAnswer = answers.Answer2 });
+                            db.Answers.Add(new Answers { ApplicationID = (int)applicationID, QuestionID = 3, CandidateAnswer = answers.Answer3 });
+                            db.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        if (rowToUpdate1 != null && rowToUpdate2 != null && rowToUpdate3 != null)
+                        {
+                            rowToUpdate1.ManagerAnswer = answers.Answer1;
+                            rowToUpdate2.ManagerAnswer = answers.Answer1;
+                            rowToUpdate3.ManagerAnswer = answers.Answer1;
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            db.Answers.Add(new Answers { ApplicationID = (int)applicationID, QuestionID = 1, ManagerAnswer = answers.Answer1 });
+                            db.Answers.Add(new Answers { ApplicationID = (int)applicationID, QuestionID = 2, ManagerAnswer = answers.Answer2 });
+                            db.Answers.Add(new Answers { ApplicationID = (int)applicationID, QuestionID = 3, ManagerAnswer = answers.Answer3 });
+                            db.SaveChanges();
+                        }
+                    }
+                    return RedirectToAction("ViewAnswerList", "Answer");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Error = ex.Message;
+                    throw;
+                }
             }
-            catch (Exception ex)
-            {
-                ViewBag.Error = ex.Message;
-                throw;
-            }
+            ModelState.AddModelError("", "Error");
+            return View();
         }
 
         public ActionResult EmailSent()
         {
             return View();
         }
-        //--------------------Email Part End--------------------------------------------------
-        public ActionResult AssignManager()
-        {
-                ViewBag.ApplicationList = new SelectList(db.Applications, "ID", "ID");
-                ViewBag.ManagerList = new SelectList(db.Managers, "ID", "FirstName");
-                return View();
-         }
-       
-
-        [HttpPost]
-        public ActionResult AssignManager(Application_Manager application_manager)
-        {
-            try
-            {
-                ViewBag.ApplicationList = new SelectList(db.Applications, "ID", "ID");
-                ViewBag.ManagerList = new SelectList(db.Managers, "ID", "FirstName");
-                if (ModelState.IsValid)
-                {
-
-                    db.Application_Manager.Add(application_manager);
-                    db.SaveChanges();
-                    return RedirectToAction("ViewApplicationList");
-                }
-                return View(application_manager);
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Error = ex.Message;
-                return View();
-            }
-        }
-
-        public ActionResult AssignRecruiter()
-        {
-            ViewBag.ApplicationList = new SelectList(db.Applications, "ID", "ID");
-            ViewBag.RecruiterList = new SelectList(db.Recruiters, "ID", "Name");
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult AssignRecruiter(Application_Recruiter application_recruiter)
-        {
-            try
-            {
-                ViewBag.ApplicationList = new SelectList(db.Applications, "ID", "ID");
-                ViewBag.RecruiterList = new SelectList(db.Recruiters, "ID", "Name");
-                if (ModelState.IsValid)
-                {
-
-                    db.Application_Recruiter.Add(application_recruiter);
-                    db.SaveChanges();
-                    return RedirectToAction("ViewApplicationList");
-                }
-                return View(application_recruiter);
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Error = ex.Message;
-                return View();
-            }
-        }
 
         public ActionResult AddApplication()
         {
             //SelectList(datatable, Value,  WhatToShow in the list)
             ViewBag.CandidateList = new SelectList(db.Candidates, "ID", "FullName");
+            ViewBag.ManagerList = new SelectList(db.Managers, "ID", "FullName");
+            ViewBag.RecruiterList = new SelectList(db.Recruiters, "ID", "FullName");
             ViewBag.PositionList = new SelectList(db.Positions, "ID", "Name");
             ViewBag.GradeList = new SelectList(db.Grades, "ID", "Name");
             return View();
@@ -176,9 +148,6 @@ namespace StajProject.Controllers
         [HttpPost]
         public ActionResult AddApplication(Applications application)
         {
-            ViewBag.CandidateList = new SelectList(db.Candidates, "ID", "FullName");
-            ViewBag.PositionList = new SelectList(db.Positions, "ID", "Name");
-            ViewBag.GradeList = new SelectList(db.Grades, "ID", "Name");
             try
             {
                 if (ModelState.IsValid)
@@ -228,7 +197,7 @@ namespace StajProject.Controllers
                 ViewBag.PositionList = new SelectList(db.Positions, "ID", "Name");
                 ViewBag.GradeList = new SelectList(db.Grades, "ID", "Name");
                 ViewBag.ManagerList = new SelectList(db.Managers, "ID", "FullName");
-                ViewBag.RecruiterList = new SelectList(db.Grades, "ID", "FullName");
+                ViewBag.RecruiterList = new SelectList(db.Recruiters, "ID", "FullName");
                 if (id == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -251,11 +220,6 @@ namespace StajProject.Controllers
         {
             try
             {
-                ViewBag.CandidateList = new SelectList(db.Candidates, "ID", "FirstName");
-                ViewBag.PositionList = new SelectList(db.Positions, "ID", "Name");
-                ViewBag.GradeList = new SelectList(db.Grades, "ID", "Name");
-                ViewBag.ManagerList = new SelectList(db.Managers, "ID", "FullName");
-                ViewBag.RecruiterList = new SelectList(db.Grades, "ID", "FullName");
                 if (ModelState.IsValid)
                 {
                     db.Entry(application).State = EntityState.Modified;
@@ -273,9 +237,6 @@ namespace StajProject.Controllers
         [OverrideActionFilters]
         public ActionResult ViewApplicationList()
         {
-            //var dsaf = db.Application_Manager.Where(x => x.ApplicationID == x.Applications.ID).FirstOrDefault();
-            var dsaf = db.Applications.ToList();
-
             return View(db.Applications.ToList());
         }
 

@@ -15,26 +15,19 @@ namespace StajProject.Models
 
     public partial class Applications
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Applications()
-        {
-            this.Answers = new HashSet<Answers>();
-        }
-
-        [Display(Name = "App Id")]
         public int ID { get; set; }
         public System.DateTime Date { get; set; }
         public int CandidateID { get; set; }
         public int PositionID { get; set; }
         public int GradeID { get; set; }
+        public Nullable<int> ManagerID { get; set; }
+        public Nullable<int> RecruiterID { get; set; }
         public bool IsSent { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Answers> Answers { get; set; }
-        public virtual Application_Manager Application_Manager { get; set; }
-        public virtual Application_Recruiter Application_Recruiter { get; set; }
         public virtual Candidates Candidates { get; set; }
         public virtual Grades Grades { get; set; }
+        public virtual Managers Managers { get; set; }
         public virtual Positions Positions { get; set; }
+        public virtual Recruiters Recruiters { get; set; }
     }
 }

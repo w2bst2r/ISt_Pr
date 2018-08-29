@@ -29,6 +29,12 @@ namespace StajProject.Models
         [Display(Name = "Grade")]
         public int GradeID { get; set; }
 
+        [Display(Name = "Manager")]
+        public Nullable<int> ManagerID { get; set; }
+
+        [Display(Name = "Recruiter")]
+        public Nullable<int> RecruiterID { get; set; }
+
         [Display(Name = "Email Sent?")]
         public bool IsSent { get; set; }
     }

@@ -185,7 +185,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Answers.cs">
       <DependentUpon>Staj.tt</DependentUpon>
@@ -441,7 +440,6 @@
     <Content Include="ElegantLayout\images\bg2.jpg" />
     <Content Include="ElegantLayout\index.html" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Models\Staj.Context.tt">
@@ -467,7 +465,6 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
-    <Content Include="Content\templates\WelcomeEmail.cshtml" />
     <None Include="Properties\PublishProfiles\DefactoApp - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\DefactoApp - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -640,14 +637,12 @@
     <Content Include="Views\Home\IndexAfterLogIn.cshtml" />
     <Content Include="Views\Shared\_navbarAfterLogin.cshtml" />
     <Content Include="Views\Answer\ViewAnswerList.cshtml" />
+    <Content Include="Views\Application\Jquery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />

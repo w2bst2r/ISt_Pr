@@ -1,32 +1,21 @@
-﻿<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <style>
+﻿    <style>
         .navbar {
             overflow: hidden;
             background-color: #5b5b5b;
             font-family: Times New Roman, Helvetica, sans-serif;
-        }
-            .navbar a {
-                float: left;
-                font-size: 18px;
-                color: white;
-                text-align: center;
-                padding: 16px 16px;
-                text-decoration: none;
-            }
-
-                .navbar a:hover, .dropdown:hover .dropbtn {
-                    background-color: cadetblue;
-                }
+          }
+        .navbar a {
+            float: left;
+            font-size: 18px;
+            color: white;
+            text-align: center;
+            padding: 16px 16px;
+            text-decoration: none;
+          }
+        .navbar a:hover, .dropdown:hover .dropbtn {
+             background-color: cadetblue;
+          }
     </style>
-</head>
-<body>
 
     <a href="@Url.Action("Index", "Home")"><span>Home</span></a>
     <a href="@Url.Action("Index", "Candidate")"><span>Candidates</span></a>
@@ -39,11 +28,6 @@
     <a href="@Url.Action("Index", "Question")"><span>Questions</span></a>
     <a href="@Url.Action("Index", "Answer")"><span>Answers</span></a>
 
-
     <div class="nav navbar-nav navbar-right">
         @Html.ActionLink("Log out", "Logout", "Home", routeValues: null, htmlAttributes: new { id = "loginLink" })
     </div>
-
-</body>
-
-</html>

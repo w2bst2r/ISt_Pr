@@ -43,10 +43,9 @@ namespace StajProject.Controllers
                 }
                 return View(recruiter);
             }
-            catch
+            catch(Exception )
             {
-                return View();
-            }
+                throw;            }
         }
         [HttpGet]
         public ActionResult DeleteRecruiter(int? id)
@@ -61,9 +60,9 @@ namespace StajProject.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+                throw;
             }
         }
 
@@ -77,17 +76,24 @@ namespace StajProject.Controllers
         [HttpGet]
         public ActionResult EditRecruiter(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
 
-            var recruiter = db.Recruiters.Find(id);
-            if (recruiter == null)
-            {
-                return HttpNotFound();
+                var recruiter = db.Recruiters.Find(id);
+                if (recruiter == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(recruiter);
             }
-            return View(recruiter);
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         [HttpPost]
@@ -104,9 +110,9 @@ namespace StajProject.Controllers
                 }
                 return View(recruiter);
             }
-            catch
+            catch(Exception)
             {
-                return View();
+                throw;
             }
         }
 

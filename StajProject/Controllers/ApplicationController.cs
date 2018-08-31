@@ -25,6 +25,11 @@ namespace StajProject.Controllers
             return RedirectToAction("ViewApplicationList");
         }
 
+        public ActionResult Jquery()
+        {
+            return View();
+        }
+
         public async Task<ActionResult> SendEmail(SendEmailViewModel model)
         {
             try

@@ -43,9 +43,9 @@ namespace StajProject.Controllers
                 }
                 return View(position);
             }
-            catch
+            catch(Exception)
             {
-                return View();
+                throw;
             }
         }
         [HttpGet]
@@ -61,9 +61,9 @@ namespace StajProject.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+                throw;
             }
         }
 
@@ -77,17 +77,24 @@ namespace StajProject.Controllers
         [HttpGet]
         public ActionResult EditPosition(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
 
-            var position = db.Positions.Find(id);
-            if (position == null)
-            {
-                return HttpNotFound();
+                var position = db.Positions.Find(id);
+                if (position == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(position);
             }
-            return View(position);
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         [HttpPost]
@@ -104,9 +111,9 @@ namespace StajProject.Controllers
                 }
                 return View(position);
             }
-            catch
+            catch(Exception)
             {
-                return View();
+                throw;
             }
         }
 

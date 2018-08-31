@@ -38,9 +38,9 @@ namespace StajProject.Controllers
                 }
                 return View(department);
             }
-            catch
+            catch(Exception)
             {
-                return View();
+                throw;
             }
         }
         [HttpGet]
@@ -56,9 +56,9 @@ namespace StajProject.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+                throw;
             }
         }
 
@@ -72,16 +72,23 @@ namespace StajProject.Controllers
         [HttpGet]
         public ActionResult EditDepartment(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                var department = db.Departments.Find(id);
+                if (department == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(department);
             }
-            var department = db.Departments.Find(id);
-            if (department == null)
+            catch (Exception)
             {
-                return HttpNotFound();
+                throw;
             }
-            return View(department);
         }
 
         [HttpPost]
@@ -97,9 +104,9 @@ namespace StajProject.Controllers
                 }
                 return View(department);
             }
-            catch
+            catch(Exception)
             {
-                return View();
+                throw;
             }
         }
 

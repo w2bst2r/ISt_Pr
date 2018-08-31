@@ -10,7 +10,6 @@ using System.Web.Mvc;
 
 namespace StajProject.Controllers
 {
-    [AdminFilter]
     public class ManagerController : Controller
     {
         ProjectEntities db = new ProjectEntities();
@@ -40,9 +39,9 @@ namespace StajProject.Controllers
                 }
                 return View(manager);
             }
-            catch
+            catch(Exception )
             {
-                return View();
+                throw;
             }
         }
         [HttpGet]
@@ -58,9 +57,9 @@ namespace StajProject.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+                throw;
             }
         }
 
@@ -74,16 +73,23 @@ namespace StajProject.Controllers
         [HttpGet]
         public ActionResult EditManager(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                var manager = db.Managers.Find(id);
+                if (manager == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(manager);
             }
-            var manager = db.Managers.Find(id);
-            if (manager == null)
+            catch (Exception)
             {
-                return HttpNotFound();
+                throw;
             }
-            return View(manager);
         }
 
         [HttpPost]
@@ -99,9 +105,9 @@ namespace StajProject.Controllers
                 }
                 return View(manager);
             }
-            catch
+            catch(Exception)
             {
-                return View();
+                throw;
             }
         }
         [OverrideActionFilters]

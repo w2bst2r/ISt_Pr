@@ -55,10 +55,9 @@ namespace StajProject.Controllers
                 return View("Login");
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
-                ViewBag.Error = ex.InnerException;
-                return View();
+                throw;
             }
         }
 
@@ -87,10 +86,9 @@ namespace StajProject.Controllers
                 }
                 return View("Index");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                ViewBag.Error = ex.InnerException;
-                return View();
+                throw;
             }
         }
 
@@ -98,7 +96,6 @@ namespace StajProject.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
             return View();
         }
 

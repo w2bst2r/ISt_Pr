@@ -23,7 +23,6 @@ namespace StajProject.Controllers
         [HttpGet]
         public ActionResult AddCandidate()
         {
-
             return View();
         }
 
@@ -40,10 +39,9 @@ namespace StajProject.Controllers
                 }
                 return View();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                ViewBag.Error = ex.Message;
-                return View();
+                throw;
             }
         }
         [HttpGet]
@@ -65,7 +63,6 @@ namespace StajProject.Controllers
             }
         }
 
-
         public ActionResult ClearForm()
         {
             ModelState.Clear();
@@ -75,16 +72,23 @@ namespace StajProject.Controllers
         [HttpGet]
         public ActionResult EditCandidate(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                var candidate = db.Candidates.Find(id);
+                if (candidate == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(candidate);
             }
-            var candidate = db.Candidates.Find(id);
-            if (candidate == null)
+            catch (Exception)
             {
-                return HttpNotFound();
+                throw;
             }
-            return View(candidate);
         }
 
         [HttpPost]

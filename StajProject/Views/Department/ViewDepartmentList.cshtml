@@ -35,8 +35,8 @@ else
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "EditDepartment", new { id = item.ID }) |
-                        @Html.ActionLink("Delete", "DeleteDepartment", new { id = item.ID })
+                        @Html.ActionLink("Edit", "EditDepartment", new { id = item.ID }, new { @class = "far fa-edit", style = "color:#0a69e3" })
+                        @Html.ActionLink("Delete", "DeleteDepartment", new { id = item.ID }, new { @class = "js-delete fas fa-trash-alt", style = "color:#dd7676" })
                     </td>
                 </tr>
             }
@@ -49,8 +49,10 @@ else
     <script>
         $(document).ready(function () {
             $("#Departments").DataTable();
-            $("#Departments .js-delete").on("click", function () {
-                confirm("are you sure you want to delete this department");
+            $("#Departments .js-delete").on("click", function (e) {
+                if (confirm("are you sure you want to delete this department") == false) {
+                    e.preventDefault();
+                }
             });
         });
     </script>

@@ -15,6 +15,7 @@ using System.Web.Mvc;
 
 namespace StajProject.Controllers
 {
+    [AdminFilter]
     public class ApplicationController : Controller
     {
         ProjectEntities db = new ProjectEntities();

@@ -83,27 +83,27 @@ else
                     @Html.DisplayFor(model => item.IsSent)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "EditApplication", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "DeleteApplication", new { id = item.ID }, new { @class = "js-delete" }) |
-                    @Html.ActionLink("Send Survey", "SendEmail", new { ApplicationID = item.ID, CandidateEmail = item.Candidates.Email, CandidateFullName = item.Candidates.Fullname, ManagerEmail = item.Managers.Email,  ManagerFullName = item.Managers.FullName })
+                    @Html.ActionLink("Edit", "EditApplication", new { id = item.ID }, new { @class = "far fa-edit" , style = "color:#0a69e3" }) 
+                    @Html.ActionLink("Delete", "DeleteApplication", new { id = item.ID }, new { @class = "js-delete fas fa-trash-alt", style = "color:#dd7676" }) 
+                    @Html.ActionLink("Send Survey", "SendEmail", new { ApplicationID = item.ID, CandidateEmail = item.Candidates.Email, CandidateFullName = item.Candidates.Fullname,
+                   ManagerEmail = item.Managers.Email,  ManagerFullName = item.Managers.FullName }, new { @class = "fas fa-share-square", style = "color:#639721" })
                </td>
             </tr>
         }
     </tbody>
 </table>
 }
-
-
+<i class="far fa-share-square"></i>
 @section scripts
 {
-
-       <script>
+<script>
         $(document).ready(function () {
             $("#Applications").DataTable();
-            $("#Applications .js-delete").on("click", function() {
-                confirm("are you sure you want to delete this customer");
-                
+            $("#Applications .js-delete").on("click", function (e) {
+                if (confirm("are you sure you want to delete this application") == false) {
+                    e.preventDefault();
+                }
             });
         });
-    </script>
+</script>
 }

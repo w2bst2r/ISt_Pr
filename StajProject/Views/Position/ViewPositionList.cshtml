@@ -47,8 +47,8 @@ else
                     @Html.DisplayFor(modelItem => item.State)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "EditPosition", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "DeletePosition", new { id = item.ID })
+                    @Html.ActionLink("Edit", "EditPosition", new { id = item.ID }, new { @class = "far fa-edit", style = "color:#0a69e3" }) 
+                    @Html.ActionLink("Delete", "DeletePosition", new { id = item.ID }, new { @class = "js-delete fas fa-trash-alt", style = "color:#dd7676" })
                 </td>
             </tr>
         }

@@ -1,4 +1,5 @@
-﻿using StajProject.Models;
+﻿using StajProject.Filters;
+using StajProject.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace StajProject.Controllers
 {
+    [AdminFilter]
     public class DepartmentController : Controller
     {
         ProjectEntities db = new ProjectEntities();
